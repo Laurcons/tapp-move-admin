@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthPageModule } from './auth-page/auth-page.module';
+import { AuthPageModule } from './routes/auth-page/auth-page.module';
 import { HttpClientModule } from "@angular/common/http";
 
 import { MatSidenavModule } from '@angular/material/sidenav';

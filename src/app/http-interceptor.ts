@@ -9,7 +9,7 @@ import {
 
 import { Observable } from 'rxjs';
 import { environment } from "../environments/environment";
-import { TokenService } from './auth/token.service';
+import { TokenService } from './services/token.service';
 
 @Injectable()
 export class MainHttpInterceptor implements HttpInterceptor {

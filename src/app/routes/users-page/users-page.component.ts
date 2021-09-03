@@ -1,6 +1,6 @@
-import { AuthService } from './../auth/auth.service';
-import { UserService } from './../backend/user.service';
-import { User } from './../model/user-model';
+import { AuthService } from '../../services/auth.service';
+import { UserService } from '../../services/user.service';
+import { User } from '../../model/user-model';
 import { Component, OnInit } from '@angular/core';
 
 type UserWithCurrentRides = User & {currentRides: number};

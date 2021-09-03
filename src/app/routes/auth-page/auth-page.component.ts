@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AuthService } from '../auth/auth.service';
-import { Admin } from '../model/admin-model';
+import { AuthService } from '../../services/auth.service';
+import { Admin } from '../../model/admin-model';
 
 @Component({
 	selector: 'app-auth-page',
