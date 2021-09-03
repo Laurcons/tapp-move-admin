@@ -21,14 +21,15 @@ export class MainHttpInterceptor implements HttpInterceptor {
 		next: HttpHandler
 	): Observable<HttpEvent<any>> {
 		const url = req.url;
-		const headers = req.headers;
+		const headers: Record<string, string> = {};
 		const token = this.tokenService.getToken();
+		console.log({token});
 		if (token) {
-			headers.set("Authorization", `Bearer ${token}`);
+			headers.Authorization = `Bearer ${token}`;
 		}
 		const newReq = req.clone({
 			url: `${environment.apiBase}${url}`,
-			headers
+			setHeaders: headers
 		});
 		return next.handle(newReq);
 	}
