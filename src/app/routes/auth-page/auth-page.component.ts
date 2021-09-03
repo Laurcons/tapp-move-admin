@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -13,18 +14,19 @@ export class AuthPageComponent implements OnInit {
 	admin: Admin | null = null;
 	email = new FormControl("", [ Validators.required, Validators.email ]);
 	password = new FormControl("", [ Validators.required, Validators.minLength(4) ]);
-	isLoading = true;
+	isLoading = false;
 
 	constructor(
 		private authService: AuthService,
-		private snackBar: MatSnackBar
+		private snackBar: MatSnackBar,
+		private router: Router
 	) {
-		authService.adminChanged$.subscribe(val => {
-			this.admin = val;
-		});
-		authService.startupLoginFinished$.subscribe(isFinished => {
-			this.isLoading = !isFinished;
-		});
+		// authService.adminChanged$.subscribe(val => {
+		// 	this.admin = val;
+		// });
+		// authService.startupLoginFinished$.subscribe(isFinished => {
+		// 	this.isLoading = !isFinished;
+		// });
 	}
 
 	ngOnInit(): void {}
@@ -41,6 +43,7 @@ export class AuthPageComponent implements OnInit {
 				this.email.value,
 				this.password.value
 			);
+			this.router.navigate(['/users']);
 			this.password.setValue("");
 		} catch (_) {
 			this.snackBar.open("Couldn't perform login!");
