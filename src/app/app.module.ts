@@ -1,3 +1,4 @@
+import { TimeagoModule } from 'ngx-timeago';
 import { MainHttpInterceptor } from './http-interceptor';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -32,6 +33,7 @@ import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 		AuthPageModule,
 		HttpClientModule,
 		MatCardModule,
+		TimeagoModule.forRoot(),
 	],
 	providers: [
 		{

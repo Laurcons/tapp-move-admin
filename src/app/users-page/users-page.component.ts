@@ -1,15 +1,30 @@
+import { AuthService } from './../auth/auth.service';
+import { UserService } from './../backend/user.service';
+import { User } from './../model/user-model';
 import { Component, OnInit } from '@angular/core';
 
+type UserWithCurrentRides = User & {currentRides: number};
+
 @Component({
-  selector: 'app-users-page',
-  templateUrl: './users-page.component.html',
-  styleUrls: ['./users-page.component.scss']
+	selector: 'app-users-page',
+	templateUrl: './users-page.component.html',
+	styleUrls: ['./users-page.component.scss'],
 })
 export class UsersPageComponent implements OnInit {
+	isLoading = false;
+	tableData: UserWithCurrentRides[] = [];
+	tableColumns = ["email", "username", "registeredAt"];
 
-  constructor() { }
+	constructor(private userService: UserService) {}
 
-  ngOnInit(): void {
-  }
+	ngOnInit(): void {
+		this.loadData();
+	}
 
+	async loadData() {
+		this.isLoading = true;
+		this.tableData = await this.userService.getAll();
+		this.tableData.sort((a, b) => b.registeredAt.localeCompare(a.registeredAt));
+		this.isLoading = false;
+	}
 }
