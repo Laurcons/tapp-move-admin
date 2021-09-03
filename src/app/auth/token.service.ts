@@ -6,18 +6,18 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class TokenService {
 	private _token: string | null = null;
-	private _tokenSubject = new BehaviorSubject<string | null>(this._token);
-	tokenChanged$ = this._tokenSubject.asObservable();
+	// private _tokenSubject = new BehaviorSubject<string | null>(this._token);
+	// tokenChanged$ = this._tokenSubject.asObservable();
 
 	constructor() {}
 
 	setToken(token: string) {
 		this._token = token;
-		this._tokenSubject.next(token);
+		// this._tokenSubject.next(token);
 	}
 	unsetToken() {
 		this._token = null;
-		this._tokenSubject.next(null);
+		// this._tokenSubject.next(null);
 	}
 	getToken() {
 		return this._token;
