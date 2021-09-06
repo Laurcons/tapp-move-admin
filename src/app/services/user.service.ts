@@ -18,4 +18,11 @@ export class UserService {
 			.toPromise()
 			.then(res => res.users);
 	}
+
+	async getOne(id: string) {
+		return await this.http
+			.get<{ user: User }>(`/users/${id}`)
+			.toPromise()
+			.then(res => res.user);
+	}
 }

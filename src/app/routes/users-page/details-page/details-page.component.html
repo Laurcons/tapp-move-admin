@@ -1,0 +1,31 @@
+<mat-progress-bar [mode]="isLoading ? 'indeterminate' : 'determinate'"></mat-progress-bar>
+
+<div class="content">
+	<ng-container *ngIf="user">
+		<h1>Details for user {{ user.email }}</h1>
+		<mat-card class="info-card">
+			<mat-card-header>
+				<mat-card-title>Basic details</mat-card-title>
+			</mat-card-header>
+			<mat-card-content>
+				Email: {{ user.email }}<br>
+				Username: {{ user.username }}<br>
+				Registered: {{ user.registeredAt | date:"medium" }} ({{ user.registeredAt | timeago }})<br>
+				Last login: {{ user.lastLoginAt | date:"medium" }} ({{ user.lastLoginAt | timeago }})
+			</mat-card-content>
+		</mat-card>
+		<mat-card class="info-card">
+			<mat-card-header>
+				<mat-card-title>Driver's license</mat-card-title>
+			</mat-card-header>
+			<mat-card-content>
+				<ng-container *ngIf="user.driversLicense">
+					<img [src]="user.driversLicense">
+				</ng-container>
+				<ng-container *ngIf="!user.driversLicense">
+					User hasn't uploaded a driver's license.
+				</ng-container>
+			</mat-card-content>
+		</mat-card>
+	</ng-container>
+</div>

@@ -8,4 +8,5 @@ export interface User {
 	totalRides: number;
 	forgotPasswordToken?: string;
 	driversLicenseKey?: string;
+	driversLicense?: string;
 }

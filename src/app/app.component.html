@@ -4,6 +4,11 @@
 		<mat-icon>menu</mat-icon>
 	</button>
 	<span>Tapp Move - Admin Panel</span>
+	<xng-breadcrumb [separator]="bcSeparator" class="bc">
+		<ng-container *xngBreadcrumbItem="let breadcrumb">
+			<span class="bc-item">{{ breadcrumb | firstCase }}</span>
+		</ng-container>
+	</xng-breadcrumb>
 	<div class="spacer"></div>
 	<button mat-mini-fab *ngIf="isLoggedIn" (click)="onLogoutClick()">
 		<mat-icon>logout</mat-icon>
@@ -20,3 +25,7 @@
 		<router-outlet></router-outlet>
 	</mat-sidenav-content>
 </mat-sidenav-container>
+
+<ng-template #bcSeparator>
+	<span class="bc-separator">&gt;</span>
+</ng-template>

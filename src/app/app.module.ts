@@ -10,6 +10,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthPageModule } from './routes/auth-page/auth-page.module';
 import { HttpClientModule } from "@angular/common/http";
 
+import { BreadcrumbModule } from 'xng-breadcrumb';
+
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -18,9 +20,10 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
+import { FirstCasePipe } from './pipes/first-case.pipe';
 
 @NgModule({
-	declarations: [AppComponent],
+	declarations: [AppComponent, FirstCasePipe],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
@@ -34,6 +37,7 @@ import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 		HttpClientModule,
 		MatCardModule,
 		TimeagoModule.forRoot(),
+		BreadcrumbModule,
 	],
 	providers: [
 		{

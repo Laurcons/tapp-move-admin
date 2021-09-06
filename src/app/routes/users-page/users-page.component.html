@@ -1,14 +1,37 @@
 <h1>All users</h1>
 
-<mat-progress-bar [mode]="isLoading ? 'indeterminate' : 'determinate'" value="0"></mat-progress-bar>
+<mat-progress-bar
+	[mode]="isLoading ? 'indeterminate' : 'determinate'"
+	value="0"
+></mat-progress-bar>
 <table mat-table [dataSource]="tableData">
+	<ng-container matColumnDef="index">
+		<th mat-header-cell *matHeaderCellDef>No.</th>
+		<td mat-cell *matCellDef="let user">
+			{{ user.index }}
+		</td>
+	</ng-container>
 	<mat-text-column name="username"></mat-text-column>
 	<mat-text-column name="email"></mat-text-column>
 	<ng-container matColumnDef="registeredAt">
 		<th mat-header-cell *matHeaderCellDef>Registered at</th>
 		<td mat-cell *matCellDef="let user">
-			{{ user.registeredAt | date:'medium' }}
+			{{ user.registeredAt | date: "medium" }}
 			({{ user.registeredAt | timeago }})
+		</td>
+	</ng-container>
+	<ng-container matColumnDef="totalRides">
+		<th mat-header-cell *matHeaderCellDef>Rides</th>
+		<td mat-cell *matCellDef="let user">
+			{{ user.currentRides }} current rides ({{ user.totalRides }} total)
+		</td>
+	</ng-container>
+	<ng-container matColumnDef="options">
+		<th mat-header-cell *matHeaderCellDef>Options</th>
+		<td mat-cell *matCellDef="let user">
+			<a mat-raised-button color="primary" [routerLink]="'/users/' + user._id">
+				View details
+			</a>
 		</td>
 	</ng-container>
 
