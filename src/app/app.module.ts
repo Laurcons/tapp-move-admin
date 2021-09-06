@@ -20,10 +20,10 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
-import { FirstCasePipe } from './pipes/first-case.pipe';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
-	declarations: [AppComponent, FirstCasePipe],
+	declarations: [AppComponent],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
@@ -38,6 +38,7 @@ import { FirstCasePipe } from './pipes/first-case.pipe';
 		MatCardModule,
 		TimeagoModule.forRoot(),
 		BreadcrumbModule,
+  SharedModule,
 	],
 	providers: [
 		{

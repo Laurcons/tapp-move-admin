@@ -1,3 +1,4 @@
+import { SharedModule } from './../../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -9,6 +10,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 import { TimeagoModule } from 'ngx-timeago';
 import { BreadcrumbModule } from 'xng-breadcrumb';
@@ -24,6 +26,7 @@ import { DetailsPageComponent } from './details-page/details-page.component';
 	],
 	imports: [
 		CommonModule,
+		SharedModule,
 		UsersPageRoutingModule,
 		MatTableModule,
 		MatProgressBarModule,
@@ -32,6 +35,7 @@ import { DetailsPageComponent } from './details-page/details-page.component';
 		TimeagoModule.forChild(),
 		BreadcrumbModule,
 		MatCardModule,
+		MatGridListModule,
 	],
 })
 export class UsersPageModule {}

@@ -7,3 +7,22 @@
 .info-card {
 	margin-bottom: 15px;
 }
+
+.top-row {
+	display: flex;
+	& * {
+		flex: 1 0;
+		margin-left: 15px;
+	}
+	& *:first-child {
+		margin-left: 0;
+	}
+}
+
+[mat-table] {
+	width: 100%;
+}
+
+mat-card-header.justified {
+	justify-content: space-between;
+}
