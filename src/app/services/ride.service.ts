@@ -1,4 +1,4 @@
-import { Ride } from './../model/ride-model';
+import { Ride } from '../shared/model/ride-model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 

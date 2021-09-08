@@ -1,7 +1,7 @@
 import { BehaviorSubject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Admin } from '../model/admin-model';
+import { Admin } from '../shared/model/admin-model';
 import { TokenService } from './token.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 

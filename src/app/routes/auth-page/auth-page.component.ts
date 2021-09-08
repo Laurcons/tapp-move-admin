@@ -1,9 +1,10 @@
+import { TokenService } from './../../services/token.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../../services/auth.service';
-import { Admin } from '../../model/admin-model';
+import { Admin } from '../../shared/model/admin-model';
 
 @Component({
 	selector: 'app-auth-page',
@@ -18,18 +19,15 @@ export class AuthPageComponent implements OnInit {
 
 	constructor(
 		private authService: AuthService,
+		private tokenService: TokenService,
 		private snackBar: MatSnackBar,
 		private router: Router
 	) {
-		// authService.adminChanged$.subscribe(val => {
-		// 	this.admin = val;
-		// });
-		// authService.startupLoginFinished$.subscribe(isFinished => {
-		// 	this.isLoading = !isFinished;
-		// });
 	}
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		this.tokenService.unsetToken();
+	}
 
 	async loginClick(event: Event) {
 		event.preventDefault();
@@ -50,13 +48,5 @@ export class AuthPageComponent implements OnInit {
 		} finally {
 			this.isLoading = false;
 		}
-	}
-
-	logoutClick() {
-		this.isLoading = true;
-		this.authService
-			.logout()
-			.finally(() => this.isLoading = false);
-		// setTimeout(() => this.isLoading = false, 2000);
 	}
 }

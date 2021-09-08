@@ -1,6 +1,6 @@
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
-import { User } from '../../model/user-model';
+import { User } from '../../shared/model/user-model';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { LicenseDialogComponent } from './license-dialog/license-dialog.component';

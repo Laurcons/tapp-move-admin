@@ -1,6 +1,6 @@
 
 <mat-toolbar>
-	<button mat-icon-button (click)="isSidebarOpen = !isSidebarOpen">
+	<button mat-icon-button *ngIf="isLoggedIn" (click)="isSidebarOpen = !isSidebarOpen">
 		<mat-icon>menu</mat-icon>
 	</button>
 	<span>Tapp Move - Admin Panel</span>
@@ -10,7 +10,8 @@
 		</ng-container>
 	</xng-breadcrumb>
 	<div class="spacer"></div>
-	<button mat-mini-fab *ngIf="isLoggedIn" (click)="onLogoutClick()">
+	<mat-spinner diameter="40" *ngIf="isDoingTask"></mat-spinner>
+	<button mat-mini-fab class="item-spacer" *ngIf="isLoggedIn" (click)="onLogoutClick()">
 		<mat-icon>logout</mat-icon>
 	</button>
 </mat-toolbar>

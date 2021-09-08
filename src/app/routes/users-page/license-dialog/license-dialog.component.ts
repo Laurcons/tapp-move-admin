@@ -1,4 +1,4 @@
-import { User } from './../../../model/user-model';
+import { User } from '../../../shared/model/user-model';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 

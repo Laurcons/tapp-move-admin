@@ -1,3 +1,4 @@
+import { BackgroundWorkService } from './services/background-work.service';
 import { TokenService } from './services/token.service';
 import { AuthService } from './services/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -20,6 +21,7 @@ import {
 export class AppComponent implements OnInit {
 	isSidebarOpen = false;
 	isLazyLoading = false;
+	isDoingTask = false;
 	isLoggedIn = false;
 	private lazyloadingSnackRef: MatSnackBarRef<TextOnlySnackBar> | null = null;
 
@@ -27,12 +29,9 @@ export class AppComponent implements OnInit {
 		private router: Router,
 		private snackbarService: MatSnackBar,
 		private authService: AuthService,
-		private tokenService: TokenService
-	) {
-		tokenService.tokenChanged$.subscribe(token => {
-			this.isLoggedIn = !!token;
-		});
-	}
+		private tokenService: TokenService,
+		private backgroundWorkService: BackgroundWorkService
+	) {}
 
 	ngOnInit() {
 		this.router.events.subscribe((event) => {
@@ -41,12 +40,18 @@ export class AppComponent implements OnInit {
 				setTimeout(() => {
 					if (this.isLazyLoading)
 						this.lazyloadingSnackRef =
-							this.snackbarService.open('Please wait');
+							this.snackbarService.open('Please wait', undefined, { duration: 100 * 60 * 1000 });
 				}, 500);
 			} else if (event instanceof RouteConfigLoadEnd) {
 				this.isLazyLoading = false;
 				this.lazyloadingSnackRef?.dismiss();
 			}
+		});
+		this.tokenService.tokenChanged$.subscribe((token) => {
+			setTimeout(() => (this.isLoggedIn = !!token), 0);
+		});
+		this.backgroundWorkService.taskList$.subscribe((list) => {
+			setTimeout(() => (this.isDoingTask = list.length !== 0), 0);
 		});
 	}
 
@@ -54,6 +59,6 @@ export class AppComponent implements OnInit {
 		const ref = this.snackbarService.open('Please wait');
 		await this.authService.logout();
 		ref.dismiss();
-		this.router.navigate(["/auth"]);
+		this.router.navigate(['/auth']);
 	}
 }

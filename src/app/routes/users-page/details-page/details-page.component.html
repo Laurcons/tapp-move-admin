@@ -1,6 +1,3 @@
-<mat-progress-bar
-	[mode]="isLoading ? 'indeterminate' : 'determinate'"
-></mat-progress-bar>
 
 <div class="content">
 	<ng-container *ngIf="user">
@@ -27,7 +24,7 @@
 				</mat-card-header>
 				<mat-card-content>
 					<ng-container *ngIf="user.driversLicense">
-						<img [src]="user.driversLicense" />
+						<img [src]="user.driversLicense" class="license" />
 					</ng-container>
 					<ng-container *ngIf="!user.driversLicense">
 						User hasn't uploaded a driver's license.

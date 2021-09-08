@@ -1,8 +1,8 @@
-import { FirstCasePipe } from './first-case.pipe';
+import { FirstCasePipe } from './pipes/first-case.pipe';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DurationPipe } from './duration.pipe';
-import { RonPipe } from './ron.pipe';
+import { DurationPipe } from './pipes/duration.pipe';
+import { RonPipe } from './pipes/ron.pipe';
 
 @NgModule({
 	exports: [FirstCasePipe, DurationPipe, RonPipe],

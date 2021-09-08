@@ -1,5 +1,5 @@
 import { TimeagoModule } from 'ngx-timeago';
-import { MainHttpInterceptor } from './http-interceptor';
+import { MainHttpInterceptor } from './shared/http-interceptor';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -20,6 +20,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({
@@ -38,7 +39,8 @@ import { SharedModule } from './shared/shared.module';
 		MatCardModule,
 		TimeagoModule.forRoot(),
 		BreadcrumbModule,
-  SharedModule,
+		SharedModule,
+		MatProgressSpinnerModule,
 	],
 	providers: [
 		{
