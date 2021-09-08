@@ -22,7 +22,7 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
 	rideColumns = ['status', 'started', 'ended', 'duration', 'route', 'price', 'scooter'];
 	rideTimeout!: any;
 	ridesPage = 0;
-	entriesPerPage = 5;
+	entriesPerPage = 10;
 	totalRides = 0;
 
 	constructor(

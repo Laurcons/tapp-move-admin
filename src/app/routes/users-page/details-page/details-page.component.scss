@@ -10,11 +10,11 @@
 
 .top-row {
 	display: flex;
-	& * {
+	&>* {
 		flex: 1 0;
 		margin-left: 15px;
 	}
-	& *:first-child {
+	&>*:first-child {
 		margin-left: 0;
 	}
 }
@@ -29,4 +29,8 @@ mat-card-header.justified {
 
 img.license {
 	max-width: 500px;
+}
+
+mat-form-field {
+	width: 100%;
 }

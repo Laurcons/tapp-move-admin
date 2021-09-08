@@ -12,6 +12,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { TimeagoModule } from 'ngx-timeago';
 import { BreadcrumbModule } from 'xng-breadcrumb';
@@ -38,6 +41,9 @@ import { DetailsPageComponent } from './details-page/details-page.component';
 		MatCardModule,
 		MatGridListModule,
 		MatPaginatorModule,
+		MatInputModule,
+		MatFormFieldModule,
+		MatTooltipModule,
 	],
 })
 export class UsersPageModule {}
