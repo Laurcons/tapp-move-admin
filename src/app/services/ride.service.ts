@@ -16,10 +16,15 @@ export class RideService {
 		private http: HttpClient
 	) {}
 
-	async getRidesForUser(userId: string) {
+	async getRidesForUser(userId: string, start?: number, count?: number) {
+		let query = [];
+		if (start)
+			query.push(`start=${start}`);
+		if (count)
+			query.push(`count=${count}`);
+		const queryStr = "?" + query.join("&");
 		return this.http
-			.get<{ rides: RideWithInfo[] }>(`/users/${userId}/rides`)
-			.toPromise()
-			.then(r => r.rides);
+			.get<{ rides: RideWithInfo[], start: number; count: number; total: number; }>(`/users/${userId}/rides${queryStr}`)
+			.toPromise();
 	}
 }

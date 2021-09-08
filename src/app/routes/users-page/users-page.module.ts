@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { TimeagoModule } from 'ngx-timeago';
 import { BreadcrumbModule } from 'xng-breadcrumb';
@@ -36,6 +37,7 @@ import { DetailsPageComponent } from './details-page/details-page.component';
 		BreadcrumbModule,
 		MatCardModule,
 		MatGridListModule,
+		MatPaginatorModule,
 	],
 })
 export class UsersPageModule {}

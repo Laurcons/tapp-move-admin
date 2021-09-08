@@ -1,4 +1,3 @@
-
 <div class="content">
 	<ng-container *ngIf="user">
 		<h1>Details for user {{ user.email }}</h1>
@@ -41,7 +40,11 @@
 				<ng-container *ngIf="rides && rides.length === 0">
 					No rides.
 				</ng-container>
-				<table mat-table *ngIf="rides && rides.length !== 0" [dataSource]="rides">
+				<table
+					mat-table
+					*ngIf="rides && rides.length !== 0"
+					[dataSource]="rides"
+				>
 					<ng-container matColumnDef="status">
 						<th mat-header-cell *matHeaderCellDef>Status</th>
 						<td mat-cell *matCellDef="let ride">
@@ -51,19 +54,21 @@
 					<ng-container matColumnDef="started">
 						<th mat-header-cell *matHeaderCellDef>Started at</th>
 						<td mat-cell *matCellDef="let ride">
-							{{ ride.startedAt | date:"short" }}
+							{{ ride.startedAt | date: "short" }}
 						</td>
 					</ng-container>
 					<ng-container matColumnDef="ended">
 						<th mat-header-cell *matHeaderCellDef>Ended at</th>
 						<td mat-cell *matCellDef="let ride">
 							<ng-container *ngIf="ride.endedAt">
-								{{ ride.endedAt | date:"short" }} ({{ ride.endedAt | timeago }})
+								{{ ride.endedAt | date: "short" }} ({{
+									ride.endedAt | timeago
+								}})
 							</ng-container>
 						</td>
 					</ng-container>
 					<ng-container matColumnDef="duration">
-						<th mat-header-cell *matHeaderCellDef>Duration/Started at</th>
+						<th mat-header-cell *matHeaderCellDef>Duration</th>
 						<td mat-cell *matCellDef="let ride">
 							{{ ride.duration | duration }}
 						</td>
@@ -71,7 +76,7 @@
 					<ng-container matColumnDef="route">
 						<th mat-header-cell *matHeaderCellDef>Distance</th>
 						<td mat-cell *matCellDef="let ride">
-							{{ ride.pathDistance }} meters
+							{{ ride.pathDistance }} m
 						</td>
 					</ng-container>
 					<ng-container matColumnDef="price">
@@ -83,14 +88,28 @@
 					<ng-container matColumnDef="scooter">
 						<th mat-header-cell *matHeaderCellDef>Scooter</th>
 						<td mat-cell *matCellDef="let ride">
-							#{{ ride.scooter.code }} {{ ride.scooter.isDummy ? '(dummy)' : '(real)' }}
-							{{ ride.status === 'ongoing' ? (ride.scooter.isUnlocked ? '(unlocked)' : '(locked)') : ''}}
+							#{{ ride.scooter.code }}
+							{{ ride.scooter.isDummy ? "(dummy)" : "(real)" }}
+							{{
+								ride.status === "ongoing"
+									? ride.scooter.isUnlocked
+										? "(unlocked)"
+										: "(locked)"
+									: ""
+							}}
 						</td>
 					</ng-container>
 
 					<tr mat-header-row *matHeaderRowDef="rideColumns"></tr>
-					<tr mat-row *matRowDef="let row; columns: rideColumns;"></tr>
+					<tr mat-row *matRowDef="let row; columns: rideColumns"></tr>
 				</table>
+				<mat-paginator
+					*ngIf="rides && rides.length !== 0"
+					[pageIndex]="ridesPage"
+					[length]="totalRides"
+					[pageSize]="entriesPerPage"
+					(page)="onPageUpdate($event)"
+				></mat-paginator>
 			</mat-card-content>
 		</mat-card>
 	</ng-container>
