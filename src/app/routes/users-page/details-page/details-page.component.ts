@@ -18,7 +18,7 @@ export class DetailsPageComponent implements OnInit, OnDestroy, AfterViewInit {
 	isLoading = false;
 	user: User | null = null;
 	rides: RideWithInfo[] | null = null;
-	rideColumns = ['status', 'duration', 'route', 'price', 'scooter'];
+	rideColumns = ['status', 'started', 'ended', 'duration', 'route', 'price', 'scooter'];
 	rideInterval!: Subscription;
 
 	constructor(
