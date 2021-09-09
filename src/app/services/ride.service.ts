@@ -27,4 +27,19 @@ export class RideService {
 			.get<{ rides: RideWithInfo[], start: number; count: number; total: number; }>(`/users/${userId}/rides${queryStr}`)
 			.toPromise();
 	}
+
+	async getRidesForScooter(scooterId: string, start?: number, count?: number) {
+		let query = [];
+		if (start) query.push(`start=${start}`);
+		if (count) query.push(`count=${count}`);
+		const queryStr = '?' + query.join('&');
+		return this.http
+			.get<{
+				rides: RideWithInfo[];
+				start: number;
+				count: number;
+				total: number;
+			}>(`/scooters/${scooterId}/rides${queryStr}`)
+			.toPromise();
+	}
 }

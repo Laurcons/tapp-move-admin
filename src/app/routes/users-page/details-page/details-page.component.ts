@@ -17,23 +17,9 @@ import { SuspendDialogComponent } from '../suspend-dialog/suspend-dialog.compone
 	templateUrl: './details-page.component.html',
 	styleUrls: ['./details-page.component.scss'],
 })
-export class DetailsPageComponent implements OnInit, OnDestroy {
+export class DetailsPageComponent implements OnInit {
 	isLoading = false;
 	user: User | null = null;
-	rides: RideWithInfo[] | null = null;
-	rideColumns = [
-		'status',
-		'started',
-		'ended',
-		'duration',
-		'route',
-		'price',
-		'scooter',
-	];
-	ridesPage = 0;
-	entriesPerPage = 10;
-	totalRides = 0;
-	isDestroyed = false;
 
 	constructor(
 		private userService: UserService,
@@ -49,10 +35,6 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
 		this.loadData();
 	}
 
-	ngOnDestroy(): void {
-		this.isDestroyed = true;
-	}
-
 	async loadData() {
 		const id = this.route.snapshot.paramMap.get('id');
 		if (!id) {
@@ -64,31 +46,6 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
 			'/users/:id',
 			`Details for ${this.user.email}`
 		);
-		await this.loadRides();
-	}
-
-	async loadRides() {
-		if (this.isDestroyed) return;
-		try {
-			if (this.user) {
-				const response = await this.rideService.getRidesForUser(
-					this.user._id,
-					this.ridesPage * this.entriesPerPage,
-					this.entriesPerPage
-				);
-				this.rides = response.rides;
-				this.totalRides = response.total;
-				this.entriesPerPage = response.count;
-			}
-		} catch (_) {
-		} finally {
-			setTimeout(() => this.loadRides(), 5 * 1000);
-		}
-	}
-
-	onPageUpdate(event: PageEvent) {
-		this.ridesPage = event.pageIndex;
-		this.loadRides();
 	}
 
 	handleSuspend() {

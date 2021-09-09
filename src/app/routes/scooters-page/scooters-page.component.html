@@ -17,6 +17,7 @@
 		[title]="scooter.code"
 		(mapMouseover)="highlightScooter(scooter._id)"
 		(mapMouseout)="unhighlightScooter(scooter._id)"
+		(mapClick)="router.navigate(['/scooters/' + scooter._id])"
 	></map-marker>
 </google-map>
 

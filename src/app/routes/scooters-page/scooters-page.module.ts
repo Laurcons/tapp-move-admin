@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { DisableDialogComponent } from './disable-dialog/disable-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
 	declarations: [
@@ -24,6 +25,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 	],
 	imports: [
 		CommonModule,
+		SharedModule,
 		ScootersPageRoutingModule,
 		MatTableModule,
 		GoogleMapsModule,

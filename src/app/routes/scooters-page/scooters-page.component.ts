@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ScooterService } from 'src/app/services/scooter.service';
 import { Scooter } from 'src/app/shared/model/scooter-model';
 
@@ -14,10 +15,22 @@ export class ScootersPageComponent implements OnInit, OnDestroy {
 		center: { lat: 46.770532, lng: 23.625386 },
 	};
 	scooters: ScooterWithHighlighting[] = [];
-	tableColumns = ['code', 'status', 'batteryLevel', 'isUnlocked', 'isCharging', 'lockId'];
+	tableColumns = [
+		'code',
+		'status',
+		'batteryLevel',
+		'isUnlocked',
+		'isCharging',
+		'lockId',
+	];
 	isDestroyed = false;
 
-	constructor(private scooterService: ScooterService) {}
+	constructor(
+		private scooterService: ScooterService,
+		private _router: Router
+	) {}
+
+	get router() { return this._router; }
 
 	ngOnInit(): void {
 		this.loadData();
@@ -28,8 +41,7 @@ export class ScootersPageComponent implements OnInit, OnDestroy {
 	}
 
 	async loadData() {
-		if (this.isDestroyed)
-			return;
+		if (this.isDestroyed) return;
 		const scooters = await this.scooterService.getAll();
 		this.scooters = scooters.map((s) => ({
 			...s,
@@ -50,10 +62,10 @@ export class ScootersPageComponent implements OnInit, OnDestroy {
 
 	centerOnScooter(id: string) {
 		const scooter = this.scooters.find((s) => s._id === id);
-		if (!scooter) throw "Scooter Not Found";
+		if (!scooter) throw 'Scooter Not Found';
 		this.map.center = {
 			lat: scooter.location[0],
-			lng: scooter.location[1]
+			lng: scooter.location[1],
 		};
 	}
 }
