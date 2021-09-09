@@ -19,11 +19,19 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
 	isLoading = false;
 	user: User | null = null;
 	rides: RideWithInfo[] | null = null;
-	rideColumns = ['status', 'started', 'ended', 'duration', 'route', 'price', 'scooter'];
-	rideTimeout!: any;
+	rideColumns = [
+		'status',
+		'started',
+		'ended',
+		'duration',
+		'route',
+		'price',
+		'scooter',
+	];
 	ridesPage = 0;
 	entriesPerPage = 10;
 	totalRides = 0;
+	isDestroyed = false;
 
 	constructor(
 		private userService: UserService,
@@ -39,7 +47,7 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy(): void {
-		clearTimeout(this.rideTimeout);
+		this.isDestroyed = true;
 	}
 
 	async loadData() {
@@ -57,25 +65,32 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
 	}
 
 	async loadRides() {
-		clearTimeout(this.rideTimeout);
+		if (this.isDestroyed) return;
 		try {
 			if (this.user) {
-				const response = await this.rideService.getRidesForUser(this.user._id, this.ridesPage * this.entriesPerPage, this.entriesPerPage);
+				const response = await this.rideService.getRidesForUser(
+					this.user._id,
+					this.ridesPage * this.entriesPerPage,
+					this.entriesPerPage
+				);
 				this.rides = response.rides;
 				this.totalRides = response.total;
 				this.entriesPerPage = response.count;
 				// sort rides
 				const sortOrder = ['ongoing', 'payment-pending', 'completed'];
 				this.rides.sort((a, b) => {
-					const diff = sortOrder.findIndex(x => x === a.status) - sortOrder.findIndex(x => x === b.status);
-					if (diff !== 0)
-						return diff;
-					return DateTime.fromISO(b.startedAt).diff(DateTime.fromISO(a.startedAt)).as("milliseconds");
+					const diff =
+						sortOrder.findIndex((x) => x === a.status) -
+						sortOrder.findIndex((x) => x === b.status);
+					if (diff !== 0) return diff;
+					return DateTime.fromISO(b.startedAt)
+						.diff(DateTime.fromISO(a.startedAt))
+						.as('milliseconds');
 				});
 			}
-		} catch (_) {}
-		finally {
-			this.rideTimeout = setTimeout(() => this.loadRides(), 5 * 1000);
+		} catch (_) {
+		} finally {
+			setTimeout(() => this.loadRides(), 5 * 1000);
 		}
 	}
 
