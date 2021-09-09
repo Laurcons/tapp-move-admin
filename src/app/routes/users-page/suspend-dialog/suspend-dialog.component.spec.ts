@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LicenseDialogComponent } from './license-dialog.component';
+import { SuspendDialogComponent } from './suspend-dialog.component';
 
 describe('LicenseDialogComponent', () => {
-  let component: LicenseDialogComponent;
-  let fixture: ComponentFixture<LicenseDialogComponent>;
+  let component: SuspendDialogComponent;
+  let fixture: ComponentFixture<SuspendDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LicenseDialogComponent ]
+      declarations: [ SuspendDialogComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LicenseDialogComponent);
+    fixture = TestBed.createComponent(SuspendDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -3,7 +3,7 @@ import { UserService } from '../../services/user.service';
 import { User } from '../../shared/model/user-model';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { LicenseDialogComponent } from './license-dialog/license-dialog.component';
+import { SuspendDialogComponent } from './suspend-dialog/suspend-dialog.component';
 
 type UserInTable = User & { currentRides: number, index: number };
 
@@ -35,7 +35,7 @@ export class UsersPageComponent implements OnInit {
 	}
 
 	onViewLicenseClick(user: User) {
-		this.dialogService.open(LicenseDialogComponent, {
+		this.dialogService.open(SuspendDialogComponent, {
 			data: { user }
 		});
 	}

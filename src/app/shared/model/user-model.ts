@@ -10,4 +10,5 @@ export interface User {
 	forgotPasswordToken?: string;
 	driversLicenseKey?: string;
 	driversLicense?: string;
+	suspendedReason?: string;
 }

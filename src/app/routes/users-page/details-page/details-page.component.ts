@@ -1,3 +1,4 @@
+import { MatDialog } from '@angular/material/dialog';
 import { DateTime } from 'luxon';
 import { RideService, RideWithInfo } from './../../../services/ride.service';
 import { Ride } from '../../../shared/model/ride-model';
@@ -9,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BreadcrumbService } from 'xng-breadcrumb';
 import { interval, Subscription } from 'rxjs';
 import { PageEvent } from '@angular/material/paginator';
+import { SuspendDialogComponent } from '../suspend-dialog/suspend-dialog.component';
 
 @Component({
 	selector: 'app-details-page',
@@ -38,7 +40,8 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
 		private rideService: RideService,
 		private route: ActivatedRoute,
 		private snackbarService: MatSnackBar,
-		private breadcrumbService: BreadcrumbService
+		private breadcrumbService: BreadcrumbService,
+		private dialogService: MatDialog
 	) {}
 
 	ngOnInit(): void {
@@ -76,17 +79,6 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
 				this.rides = response.rides;
 				this.totalRides = response.total;
 				this.entriesPerPage = response.count;
-				// sort rides
-				const sortOrder = ['ongoing', 'payment-pending', 'completed'];
-				this.rides.sort((a, b) => {
-					const diff =
-						sortOrder.findIndex((x) => x === a.status) -
-						sortOrder.findIndex((x) => x === b.status);
-					if (diff !== 0) return diff;
-					return DateTime.fromISO(b.startedAt)
-						.diff(DateTime.fromISO(a.startedAt))
-						.as('milliseconds');
-				});
 			}
 		} catch (_) {
 		} finally {
@@ -97,5 +89,16 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
 	onPageUpdate(event: PageEvent) {
 		this.ridesPage = event.pageIndex;
 		this.loadRides();
+	}
+
+	handleSuspend() {
+		this.dialogService.open(SuspendDialogComponent, {
+			data: { user: this.user }
+		}).afterClosed().subscribe((result) => {
+			if (result.success) {
+				if (this.user)
+					this.user.suspendedReason = result.newUser.suspendedReason;
+			}
+		});
 	}
 }

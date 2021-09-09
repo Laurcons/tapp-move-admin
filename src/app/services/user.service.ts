@@ -25,4 +25,13 @@ export class UserService {
 			.toPromise()
 			.then(res => res.user);
 	}
+
+	async suspend(id: string, reason: string) {
+		return await this.http
+			.post<{ user: User }>(`/users/${id}/suspend`, {
+				reason
+			})
+			.toPromise()
+			.then(res => res.user);
+	}
 }

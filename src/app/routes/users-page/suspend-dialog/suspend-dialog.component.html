@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Suspension for {{ user.email }}</h1>
+
+<div class="alert">
+	You are about to suspend a user. This action is irreversible!
+</div>
+
+<mat-radio-group class="column" [(ngModel)]="option">
+	<mat-radio-button *ngFor="let reason of predefinedReasons; let index = index" [value]="index">
+		{{ reason }}
+	</mat-radio-button>
+	<mat-radio-button value="other">
+		Other:
+		<input matInput [(ngModel)]="customOption" type="text" />
+	</mat-radio-button>
+</mat-radio-group>
+
+<div mat-dialog-actions>
+	<button mat-raised-button color="warn" (click)="handleSubmit()">Suspend</button>
+	<button mat-raised-button mat-dialog-close>No, I didn't mean to!</button>
+</div>

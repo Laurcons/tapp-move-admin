@@ -1,0 +1,14 @@
+
+mat-radio-group {
+	&.column {
+		display: flex;
+		flex-direction: column;
+		&>mat-radio-button {
+			margin-bottom: 5px;
+		}
+	}
+}
+
+[matInput] {
+	width: 100%;
+}

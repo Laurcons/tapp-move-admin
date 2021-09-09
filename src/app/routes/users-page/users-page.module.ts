@@ -15,22 +15,26 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatBadgeModule } from '@angular/material/badge';
 
 import { TimeagoModule } from 'ngx-timeago';
 import { BreadcrumbModule } from 'xng-breadcrumb';
 
-import { LicenseDialogComponent } from './license-dialog/license-dialog.component';
+import { SuspendDialogComponent } from './suspend-dialog/suspend-dialog.component';
 import { DetailsPageComponent } from './details-page/details-page.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
 	declarations: [
 		UsersPageComponent,
-		LicenseDialogComponent,
+		SuspendDialogComponent,
 		DetailsPageComponent,
 	],
 	imports: [
 		CommonModule,
 		SharedModule,
+		FormsModule,
 		UsersPageRoutingModule,
 		MatTableModule,
 		MatProgressBarModule,
@@ -44,6 +48,8 @@ import { DetailsPageComponent } from './details-page/details-page.component';
 		MatInputModule,
 		MatFormFieldModule,
 		MatTooltipModule,
+		MatRadioModule,
+		MatBadgeModule,
 	],
 })
 export class UsersPageModule {}
