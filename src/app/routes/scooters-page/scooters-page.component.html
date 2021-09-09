@@ -1,0 +1,64 @@
+<div class="title-row">
+	<h1>All scooters</h1>
+	<div>Map updates every 10 seconds</div>
+</div>
+
+<google-map
+	width="100%"
+	height="600px"
+	*ngIf="scooters"
+	[center]="map.center"
+	[zoom]="13"
+>
+	<map-marker
+		*ngFor="let scooter of scooters"
+		[position]="{ lat: scooter.location[0], lng: scooter.location[1] }"
+		[label]="{ text: scooter.code }"
+		[title]="scooter.code"
+		(mapMouseover)="highlightScooter(scooter._id)"
+		(mapMouseout)="unhighlightScooter(scooter._id)"
+	></map-marker>
+</google-map>
+
+<div class="map-spacer"></div>
+
+<table mat-table [dataSource]="scooters" class="mat-elevation-z8">
+	<ng-container matColumnDef="code">
+		<th mat-header-cell *matHeaderCellDef>Code</th>
+		<td mat-cell *matCellDef="let scooter">
+			#{{ scooter.code }} ({{ scooter.isDummy ? "dummy" : "real" }})
+		</td>
+	</ng-container>
+	<ng-container matColumnDef="status">
+		<th mat-header-cell *matHeaderCellDef>Status</th>
+		<td mat-cell *matCellDef="let scooter">
+			{{ scooter.status | titlecase }}
+		</td>
+	</ng-container>
+	<ng-container matColumnDef="isUnlocked">
+		<th mat-header-cell *matHeaderCellDef>Locked?</th>
+		<td mat-cell *matCellDef="let scooter">
+			{{ scooter.isUnlocked ? "No" : "Yes" }}
+		</td>
+	</ng-container>
+	<ng-container matColumnDef="isCharging">
+		<th mat-header-cell *matHeaderCellDef>Charging?</th>
+		<td mat-cell *matCellDef="let scooter">
+			{{ scooter.isCharging ? "Yes" : "No" }}
+		</td>
+	</ng-container>
+	<ng-container matColumnDef="lockId">
+		<th mat-header-cell *matHeaderCellDef>Internal Network Id</th>
+		<td mat-cell *matCellDef="let scooter">
+			{{ scooter.lockId }}
+		</td>
+	</ng-container>
+
+	<tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+	<tr
+		mat-row
+		*matRowDef="let row; columns: tableColumns"
+		[class]="{ highlighted: row.isHighlighted, 'clickable-row': true }"
+		(mouseenter)="centerOnScooter(row._id)"
+	></tr>
+</table>
