@@ -31,20 +31,35 @@
 	</ng-container>
 	<ng-container matColumnDef="status">
 		<th mat-header-cell *matHeaderCellDef>Status</th>
+		<td mat-cell *matCellDef="let scooter" class="separated">
+			<span class="" *ngIf="scooter.status === 'available'">Available</span>
+			<span class="gray" *ngIf="scooter.status !== 'available'">Available</span>
+			<span class="" *ngIf="scooter.status === 'disabled'">Disabled</span>
+			<span class="gray" *ngIf="scooter.status !== 'disabled'">Disabled</span>
+			<span class="" *ngIf="scooter.status === 'booked'">Booked</span>
+			<span class="gray" *ngIf="scooter.status !== 'booked'">Booked</span>
+			<span class="" *ngIf="scooter.status === 'unavailable'">Unavailable</span>
+			<span class="gray" *ngIf="scooter.status !== 'unavailable'">Unavailable</span>
+		</td>
+	</ng-container>
+	<ng-container matColumnDef="batteryLevel">
+		<th mat-header-cell *matHeaderCellDef>Battery level</th>
 		<td mat-cell *matCellDef="let scooter">
-			{{ scooter.status | titlecase }}
+			{{ scooter.batteryLevel }}%
 		</td>
 	</ng-container>
 	<ng-container matColumnDef="isUnlocked">
 		<th mat-header-cell *matHeaderCellDef>Locked?</th>
 		<td mat-cell *matCellDef="let scooter">
-			{{ scooter.isUnlocked ? "No" : "Yes" }}
+			<span *ngIf="scooter.isUnlocked" class="red">No</span>
+			<span *ngIf="!scooter.isUnlocked" class="green">Yes</span>
 		</td>
 	</ng-container>
 	<ng-container matColumnDef="isCharging">
 		<th mat-header-cell *matHeaderCellDef>Charging?</th>
 		<td mat-cell *matCellDef="let scooter">
-			{{ scooter.isCharging ? "Yes" : "No" }}
+			<span *ngIf="scooter.isCharging" class="green">Yes</span>
+			<span *ngIf="!scooter.isCharging" class="red">No</span>
 		</td>
 	</ng-container>
 	<ng-container matColumnDef="lockId">
@@ -60,5 +75,6 @@
 		*matRowDef="let row; columns: tableColumns"
 		[class]="{ highlighted: row.isHighlighted, 'clickable-row': true }"
 		(mouseenter)="centerOnScooter(row._id)"
+		[routerLink]="row._id"
 	></tr>
 </table>

@@ -1,0 +1,29 @@
+
+:host {
+	display: block;
+	padding: 15px;
+}
+
+.info-card {
+	margin-bottom: 15px;
+}
+
+.display-input {
+	width: 100%;
+}
+
+.card-row {
+	display: flex;
+	&>* {
+		flex: 1 0;
+		margin-left: 15px;
+	}
+	&>*:first-child {
+		margin-left: 0;
+	}
+}
+
+.title-row {
+	display: flex;
+	justify-content: space-between;
+}

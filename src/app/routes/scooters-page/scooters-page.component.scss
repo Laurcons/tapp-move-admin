@@ -27,3 +27,16 @@ tr.clickable-row {
 	display: flex;
 	justify-content: space-between;
 }
+
+span.red {
+	color: red;
+}
+span.green {
+	color: rgb(0, 184, 0);
+}
+span.gray {
+	color: gray;
+}
+.separated>* {
+	margin-right: 3px;
+}

@@ -16,4 +16,18 @@ export class ScooterService {
 			.toPromise()
 			.then(res => res.scooters);
 	}
+
+	async getOne(id: string) {
+		return this.http
+			.get<{ scooter: Scooter }>(`/scooters/${id}`)
+			.toPromise()
+			.then(res => res.scooter);
+	}
+
+	async toggleDisabled(id: string) {
+		return this.http
+			.post<{ scooter: Scooter }>(`/scooters/${id}/toggleDisabled`, {})
+			.toPromise()
+			.then(res => res.scooter);
+	}
 }

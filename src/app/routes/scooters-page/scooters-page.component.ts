@@ -14,7 +14,7 @@ export class ScootersPageComponent implements OnInit, OnDestroy {
 		center: { lat: 46.770532, lng: 23.625386 },
 	};
 	scooters: ScooterWithHighlighting[] = [];
-	tableColumns = ['code', 'status', 'isUnlocked', 'isCharging', 'lockId'];
+	tableColumns = ['code', 'status', 'batteryLevel', 'isUnlocked', 'isCharging', 'lockId'];
 	isDestroyed = false;
 
 	constructor(private scooterService: ScooterService) {}
