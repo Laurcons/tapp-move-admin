@@ -24,18 +24,19 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
 	) {}
 
 	ngOnInit(): void {
-		this.loadData();
+		this.loadData(true);
 	}
 
 	ngOnDestroy() {
 		this.updateSubscription?.unsubscribe();
 	}
 
-	async loadData() {
+	async loadData(withTimer = false) {
 		const id = this.route.snapshot.paramMap.get("id") as string;
 		this.scooter = await this.scooterService.getOne(id);
 		this.breadcrumbService.set("/scooters/:id", `Details for #${this.scooter.code}`);
-		this.updateSubscription = timer(10 * 1000).subscribe(() => this.loadData());
+		if (withTimer)
+			this.updateSubscription = timer(10 * 1000).subscribe(() => this.loadData(true));
 	}
 
 	handleToggleDisabled() {

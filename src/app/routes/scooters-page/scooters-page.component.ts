@@ -34,20 +34,21 @@ export class ScootersPageComponent implements OnInit, OnDestroy {
 	get router() { return this._router; }
 
 	ngOnInit(): void {
-		this.loadData();
+		this.loadData(true);
 	}
 
 	ngOnDestroy(): void {
 		this.updateSubscription?.unsubscribe();
 	}
 
-	async loadData() {
+	async loadData(withTimer = false) {
 		const scooters = await this.scooterService.getAll();
 		this.scooters = scooters.map((s) => ({
 			...s,
 			isHighlighted: false,
 		}));
-		this.updateSubscription = timer(10 * 1000).subscribe(() => this.loadData());
+		if (withTimer)
+			this.updateSubscription = timer(10 * 1000).subscribe(() => this.loadData(true));
 	}
 
 	highlightScooter(id: string) {

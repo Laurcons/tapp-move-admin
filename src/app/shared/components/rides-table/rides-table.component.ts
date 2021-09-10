@@ -44,13 +44,10 @@ export class RidesTableComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.loadRides();
+		this.loadRides(true);
 	}
 
-	async loadRides() {
-		// if (this.rideSubscription && this.isDestroyed) {
-		// 	this.rideSubscription.unsubscribe();
-		// }
+	async loadRides(withTimer = false) {
 		let response: PromiseType<
 			ReturnType<typeof RideService['prototype']['getRidesForScooter']>
 		>;
@@ -71,7 +68,7 @@ export class RidesTableComponent implements OnInit {
 		this.totalRides = response.total;
 		this.entriesPerPage = response.count;
 		this.rideSubscription = timer(10 * 1000).subscribe(() =>
-			this.loadRides()
+			this.loadRides(true)
 		);
 	}
 
