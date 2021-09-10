@@ -16,7 +16,7 @@ type PromiseType<T> = T extends PromiseLike<infer U> ? U : T;
 	styleUrls: ['./rides-table.component.scss'],
 })
 export class RidesTableComponent implements OnInit {
-	@Input() of!: "user" | "scooter";
+	@Input() of!: 'user' | 'scooter';
 	@Input() id!: string;
 
 	rides: RideWithInfo[] | null = null;
@@ -27,7 +27,8 @@ export class RidesTableComponent implements OnInit {
 		'duration',
 		'route',
 		'price',
-		'scooter',
+		'secondary',
+		'options'
 	];
 	ridesPage = 0;
 	entriesPerPage = 10;
@@ -35,9 +36,7 @@ export class RidesTableComponent implements OnInit {
 	isDestroyed = false;
 	rideSubscription?: Subscription;
 
-	constructor(
-		private rideService: RideService
-	) {}
+	constructor(private rideService: RideService) {}
 
 	ngOnDestroy(): void {
 		this.isDestroyed = true;
@@ -52,26 +51,28 @@ export class RidesTableComponent implements OnInit {
 		// if (this.rideSubscription && this.isDestroyed) {
 		// 	this.rideSubscription.unsubscribe();
 		// }
-		let response: PromiseType<ReturnType<typeof RideService['prototype']['getRidesForScooter']>>;
-		if (this.of === "user") {
+		let response: PromiseType<
+			ReturnType<typeof RideService['prototype']['getRidesForScooter']>
+		>;
+		if (this.of === 'user') {
 			response = await this.rideService.getRidesForUser(
 				this.id,
 				this.ridesPage * this.entriesPerPage,
 				this.entriesPerPage
 			);
-		}
-		else if (this.of === "scooter") {
+		} else if (this.of === 'scooter') {
 			response = await this.rideService.getRidesForScooter(
 				this.id,
 				this.ridesPage * this.entriesPerPage,
 				this.entriesPerPage
 			);
-		}
-		else throw "Invalid type";
+		} else throw 'Invalid type';
 		this.rides = response.rides;
 		this.totalRides = response.total;
 		this.entriesPerPage = response.count;
-		this.rideSubscription = timer(10 * 1000).subscribe(() => this.loadRides());
+		this.rideSubscription = timer(10 * 1000).subscribe(() =>
+			this.loadRides()
+		);
 	}
 
 	onPageUpdate(event: PageEvent) {

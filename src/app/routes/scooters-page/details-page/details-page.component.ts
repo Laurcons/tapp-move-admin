@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription, timer } from 'rxjs';
 import { ScooterService } from 'src/app/services/scooter.service';
 import { Scooter } from 'src/app/shared/model/scooter-model';
 import { BreadcrumbService } from 'xng-breadcrumb';
@@ -13,7 +14,7 @@ import { DisableDialogComponent } from '../disable-dialog/disable-dialog.compone
 })
 export class DetailsPageComponent implements OnInit, OnDestroy {
 	scooter: Scooter | null = null;
-	isDestroyed = false;
+	updateSubscription?: Subscription;
 
 	constructor(
 		private breadcrumbService: BreadcrumbService,
@@ -27,16 +28,14 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy() {
-		this.isDestroyed = true;
+		this.updateSubscription?.unsubscribe();
 	}
 
 	async loadData() {
-		if (this.isDestroyed)
-			return;
 		const id = this.route.snapshot.paramMap.get("id") as string;
 		this.scooter = await this.scooterService.getOne(id);
 		this.breadcrumbService.set("/scooters/:id", `Details for #${this.scooter.code}`);
-		setTimeout(() => this.loadData(), 10 * 1000);
+		this.updateSubscription = timer(10 * 1000).subscribe(() => this.loadData());
 	}
 
 	handleToggleDisabled() {

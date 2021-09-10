@@ -1,11 +1,15 @@
 import { Ride } from '../shared/model/ride-model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { User } from '../shared/model/user-model';
+import { Scooter } from '../shared/model/scooter-model';
 
 export type RideWithInfo = Ride & {
 	duration: number;
 	linearDistance: number;
 	pathDistance: number;
+	user?: User;
+	scooter?: Scooter;
 };
 
 @Injectable({
