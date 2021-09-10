@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription, timer } from 'rxjs';
 import { ScooterService } from 'src/app/services/scooter.service';
 import { Scooter } from 'src/app/shared/model/scooter-model';
 
@@ -23,7 +24,7 @@ export class ScootersPageComponent implements OnInit, OnDestroy {
 		'isCharging',
 		'lockId',
 	];
-	isDestroyed = false;
+	updateSubscription?: Subscription;
 
 	constructor(
 		private scooterService: ScooterService,
@@ -37,17 +38,16 @@ export class ScootersPageComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy(): void {
-		this.isDestroyed = true;
+		this.updateSubscription?.unsubscribe();
 	}
 
 	async loadData() {
-		if (this.isDestroyed) return;
 		const scooters = await this.scooterService.getAll();
 		this.scooters = scooters.map((s) => ({
 			...s,
 			isHighlighted: false,
 		}));
-		setTimeout(() => this.loadData(), 10 * 1000);
+		this.updateSubscription = timer(10 * 1000).subscribe(() => this.loadData());
 	}
 
 	highlightScooter(id: string) {
