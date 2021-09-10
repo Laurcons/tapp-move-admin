@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription, timer } from 'rxjs';
 import { RideService, RideWithInfo } from 'src/app/services/ride.service';
 import { UserService } from 'src/app/services/user.service';
 import { BreadcrumbService } from 'xng-breadcrumb';
@@ -32,31 +33,25 @@ export class RidesTableComponent implements OnInit {
 	entriesPerPage = 10;
 	totalRides = 0;
 	isDestroyed = false;
-	rideInterval: any;
+	rideSubscription?: Subscription;
 
 	constructor(
-		private userService: UserService,
-		private rideService: RideService,
-		private route: ActivatedRoute,
-		private snackbarService: MatSnackBar,
-		private breadcrumbService: BreadcrumbService,
-		private dialogService: MatDialog
+		private rideService: RideService
 	) {}
 
 	ngOnDestroy(): void {
 		this.isDestroyed = true;
+		this.rideSubscription?.unsubscribe();
 	}
 
 	ngOnInit(): void {
 		this.loadRides();
-		this.rideInterval = setInterval(() => this.loadRides(), 5 * 1000);
 	}
 
 	async loadRides() {
-		if (this.isDestroyed) {
-			clearInterval(this.rideInterval);
-			return;
-		}
+		// if (this.rideSubscription && this.isDestroyed) {
+		// 	this.rideSubscription.unsubscribe();
+		// }
 		let response: PromiseType<ReturnType<typeof RideService['prototype']['getRidesForScooter']>>;
 		if (this.of === "user") {
 			response = await this.rideService.getRidesForUser(
@@ -76,6 +71,7 @@ export class RidesTableComponent implements OnInit {
 		this.rides = response.rides;
 		this.totalRides = response.total;
 		this.entriesPerPage = response.count;
+		this.rideSubscription = timer(10 * 1000).subscribe(() => this.loadRides());
 	}
 
 	onPageUpdate(event: PageEvent) {
