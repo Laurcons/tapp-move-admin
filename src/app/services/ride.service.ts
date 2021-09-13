@@ -8,6 +8,7 @@ export type RideWithInfo = Ride & {
 	duration: number;
 	linearDistance: number;
 	pathDistance: number;
+	price: number;
 	user?: User;
 	scooter?: Scooter;
 };
@@ -45,5 +46,25 @@ export class RideService {
 				total: number;
 			}>(`/scooters/${scooterId}/rides${queryStr}`)
 			.toPromise();
+	}
+
+	async getAllRides(start: number, count: number) {
+		return this.http
+			.get<{
+				rides: RideWithInfo[];
+				start: number;
+				count: number;
+				total: number;
+			}>(`/rides?start=${start}&count=${count}`)
+			.toPromise();
+	}
+
+	async getRide(id: string) {
+		return this.http
+			.get<{
+				ride: RideWithInfo;
+			}>(`/rides/${id}`)
+			.toPromise()
+			.then(r => r.ride);
 	}
 }

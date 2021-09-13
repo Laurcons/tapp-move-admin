@@ -1,0 +1,23 @@
+
+:host {
+	display: block;
+	padding: 15px;
+}
+
+.row {
+	display: flex;
+	&>* {
+		flex: 1;
+	}
+	&>*:not(:first-child) {
+		margin-left: 15px;
+	}
+}
+
+.info-card {
+	margin-bottom: 15px;
+}
+
+mat-form-field {
+	width: 100%;
+}

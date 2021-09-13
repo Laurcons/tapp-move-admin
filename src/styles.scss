@@ -23,7 +23,13 @@ mat-sidenav-container {
 	box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
 }
 
-$status-colors: (
+@mixin badge {
+	background-color: gray;
+	border-radius: 5px;
+	padding: 5px;
+}
+
+$scooter-colors: (
 	available: green,
 	disabled: darkred,
 	booked: red,
@@ -32,16 +38,14 @@ $status-colors: (
 );
 
 span.scooter-badge,div.scooter-badge {
-	background-color: gray;
-	border-radius: 5px;
-	padding: 5px;
+	@include badge;
 	&.map-scooter-badge {
 		color: white !important;
 		&.highlighted {
 			background-color: white;
 			color: black !important;
 			font-weight: bolder;
-			@each $status, $color in $status-colors {
+			@each $status, $color in $scooter-colors {
 				&.#{$status} {
 					border: 3px solid $color;
 				}
@@ -49,9 +53,33 @@ span.scooter-badge,div.scooter-badge {
 		}
 	}
 
-	@each $status, $color in $status-colors {
+	@each $status, $color in $scooter-colors {
 		&.#{$status} {
 			background-color: $color;
 		}
+	}
+}
+
+$ride-colors: (
+	ongoing: rgb(0, 163, 0),
+	payment-pending: rgb(207, 135, 0),
+	completed: darkgreen
+);
+
+span.ride-badge,div.ride-badge {
+	@include badge;
+	@each $status, $color in $ride-colors {
+		&.#{$status} {
+			background-color: $color;
+		}
+	}
+}
+
+google-map {
+	.ride-label {
+		padding: 5px;
+		border-radius: 5px;
+		background-color: pink;
+		font-weight: bolder;
 	}
 }

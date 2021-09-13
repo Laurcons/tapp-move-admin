@@ -1,0 +1,15 @@
+
+:host {
+	display: block;
+	padding: 15px;
+}
+
+[mat-table] {
+	width: 100%;
+}
+
+tr.hoverable-row {
+	&:hover {
+		background-color: #666;
+	}
+}
