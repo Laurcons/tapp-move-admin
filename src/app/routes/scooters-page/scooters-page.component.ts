@@ -52,7 +52,7 @@ export class ScootersPageComponent implements OnInit, OnDestroy {
 			...s,
 			isHighlighted: false,
 		}));
-		if (withTimer)
+		// if (withTimer)
 			// timer(10 * 1000).subscribe(() => this.loadData(true));
 		this.isLoading = false;
 	}
