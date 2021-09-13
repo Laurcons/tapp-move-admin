@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription, timer } from 'rxjs';
+import { interval, Subscription, timer } from 'rxjs';
 import { ScooterService } from 'src/app/services/scooter.service';
 import { Scooter } from 'src/app/shared/model/scooter-model';
 
@@ -27,21 +27,24 @@ export class ScootersPageComponent implements OnInit, OnDestroy {
 	updateSubscription?: Subscription;
 	isDestroyed = false;
 	isLoading = false;
+	subs: Subscription[] = [];
 
 	constructor(
 		private scooterService: ScooterService,
-		private _router: Router,
-		private changeDetector: ChangeDetectorRef
+		private _router: Router
 	) {}
 
 	get router() { return this._router; }
 
 	ngOnInit(): void {
 		this.loadData();
+		this.subs.push(
+			interval(5000).subscribe(() => this.loadData())
+		);
 	}
 
 	ngOnDestroy(): void {
-		this.isDestroyed = true;
+		this.subs.forEach(s => s.unsubscribe());
 	}
 
 	async loadData() {
@@ -52,25 +55,25 @@ export class ScootersPageComponent implements OnInit, OnDestroy {
 			...s,
 			isHighlighted: false,
 		}));
-		this.scooters = this.scooters.concat(
-			Array(50)
-				.fill(0)
-				.map((_, index) => ({
-					_id: 'BWABWA' + index,
-					batteryLevel: 420,
-					code: 'CJ' + index.toString().padStart(2, 'X'),
-					isCharging: true,
-					isDummy: true,
-					isHighlighted: false,
-					isUnlocked: true,
-					location: [
-						46.771071 - 0.05 + Math.random() * 0.1,
-						23.59714 - 0.05 + Math.random() * 0.1,
-					],
-					status: 'disabled',
-					lockId: '',
-				}))
-		);
+		// this.scooters = this.scooters.concat(
+		// 	Array(50)
+		// 		.fill(0)
+		// 		.map((_, index) => ({
+		// 			_id: 'BWABWA' + index,
+		// 			batteryLevel: 420,
+		// 			code: 'CJ' + index.toString().padStart(2, 'X'),
+		// 			isCharging: true,
+		// 			isDummy: true,
+		// 			isHighlighted: false,
+		// 			isUnlocked: true,
+		// 			location: [
+		// 				46.771071 - 0.05 + Math.random() * 0.1,
+		// 				23.59714 - 0.05 + Math.random() * 0.1,
+		// 			],
+		// 			status: 'disabled',
+		// 			lockId: '',
+		// 		}))
+		// );
 		this.isLoading = false;
 	}
 
