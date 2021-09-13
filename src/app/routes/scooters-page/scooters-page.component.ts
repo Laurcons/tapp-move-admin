@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription, timer } from 'rxjs';
 import { ScooterService } from 'src/app/services/scooter.service';
@@ -30,7 +30,8 @@ export class ScootersPageComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private scooterService: ScooterService,
-		private _router: Router
+		private _router: Router,
+		private changeDetector: ChangeDetectorRef
 	) {}
 
 	get router() { return this._router; }
