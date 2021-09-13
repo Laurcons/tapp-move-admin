@@ -40,7 +40,7 @@
 			<mat-card-content>
 				<google-map
 					width="100%"
-					[center]="mapCenter"
+					[center]="mapCenter ?? { lat: 0, lng: 0 }"
 					[zoom]="14"
 				>
 					<map-polyline

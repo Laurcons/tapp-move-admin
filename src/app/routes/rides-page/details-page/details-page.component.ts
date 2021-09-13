@@ -16,7 +16,7 @@ type AdaptedRide = RideWithInfo & {
 export class DetailsPageComponent implements OnInit, OnDestroy {
 	ride?: AdaptedRide;
 	subs: Subscription[] = [];
-	mapCenter = { lat: 46.769411777033255, lng: 23.597918332402855 };
+	mapCenter: google.maps.LatLngLiteral | null = null;
 
 	constructor(
 		private rideService: RideService,
@@ -44,18 +44,20 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
 				lng: tuple[1],
 			})),
 		};
-		const count = this.ride.adaptedRoute.length;
-		const latSum = this.ride.adaptedRoute
-			.map((c) => c.lat)
-			.reduce((a, c) => a + c, 0);
-		const lngSum = this.ride.adaptedRoute
-			.map((c) => c.lng)
-			.reduce((a, c) => a + c, 0);
-		const latAvg = latSum / count;
-		const lngAvg = lngSum / count;
-		this.mapCenter = {
-			lat: latAvg,
-			lng: lngAvg
-		};
+		if (!this.mapCenter) {
+			const count = this.ride.adaptedRoute.length;
+			const latSum = this.ride.adaptedRoute
+				.map((c) => c.lat)
+				.reduce((a, c) => a + c, 0);
+			const lngSum = this.ride.adaptedRoute
+				.map((c) => c.lng)
+				.reduce((a, c) => a + c, 0);
+			const latAvg = latSum / count;
+			const lngAvg = lngSum / count;
+			this.mapCenter = {
+				lat: latAvg,
+				lng: lngAvg
+			};
+		}
 	}
 }
