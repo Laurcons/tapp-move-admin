@@ -1,6 +1,7 @@
 
 :host {
-	display: block;
+	display: flex;
+	flex-direction: column;
 	padding: 15px;
 }
 
@@ -18,19 +19,37 @@ tr.highlighted {
 
 tr.clickable-row {
 	cursor: pointer;
-	// &:hover {
-	// 	background-color: #666;
-	// }
 }
 
-.title-row {
+.sticky {
+	position: sticky;
+	top: 0;
+	&.sticky-map {
+		top: 15px;
+	}
+}
+
+.top-row {
 	display: flex;
-	justify-content: space-between;
-	& div {
-		display: flex;
-		align-items: baseline;
-		&>* {
-			margin-left: 10px;
+	align-items: start;
+	&>* {
+		margin-left: 15px;
+		flex: 1 0;
+	}
+	&>*:first-child {
+		margin-left: inherit;
+	}
+}
+
+.top-buttons {
+	margin-left: auto;
+	display: flex;
+	align-items: center;
+	margin-bottom: 15px;
+	&>* {
+		margin-left: 5px;
+		&:first-child {
+			margin-left: inherit;
 		}
 	}
 }
@@ -52,4 +71,9 @@ span.gray {
 	display: block;
 	background-color: blue;
 	padding: 4px;
+}
+
+span.scooter-badge {
+	background-color: gray;
+	border-radius: 5px;
 }

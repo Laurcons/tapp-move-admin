@@ -13,7 +13,7 @@ type ScooterWithHighlighting = Scooter & { isHighlighted: boolean };
 })
 export class ScootersPageComponent implements OnInit, OnDestroy {
 	map = {
-		center: { lat: 46.770532, lng: 23.625386 },
+		center: { lat: 46.771071, lng: 23.59714 },
 	};
 	scooters: ScooterWithHighlighting[] = [];
 	tableColumns = [
@@ -36,15 +36,14 @@ export class ScootersPageComponent implements OnInit, OnDestroy {
 	get router() { return this._router; }
 
 	ngOnInit(): void {
-		this.loadData(true);
+		this.loadData();
 	}
 
 	ngOnDestroy(): void {
-		// this.updateSubscription?.unsubscribe();
 		this.isDestroyed = true;
 	}
 
-	async loadData(withTimer = false) {
+	async loadData() {
 		if (this.isDestroyed) return;
 		this.isLoading = true;
 		const scooters = await this.scooterService.getAll();
@@ -52,13 +51,36 @@ export class ScootersPageComponent implements OnInit, OnDestroy {
 			...s,
 			isHighlighted: false,
 		}));
-		// if (withTimer)
-			// timer(10 * 1000).subscribe(() => this.loadData(true));
+		this.scooters = this.scooters.concat(
+			Array(50)
+				.fill(0)
+				.map((_, index) => ({
+					_id: 'BWABWA' + index,
+					batteryLevel: 420,
+					code: 'CJ' + index.toString().padStart(2, 'X'),
+					isCharging: true,
+					isDummy: true,
+					isHighlighted: false,
+					isUnlocked: true,
+					location: [
+						46.771071 - 0.05 + Math.random() * 0.1,
+						23.59714 - 0.05 + Math.random() * 0.1,
+					],
+					status: 'disabled',
+					lockId: '',
+				}))
+		);
 		this.isLoading = false;
 	}
 
-	highlightScooter(id: string) {
+	highlightScooter(id: string, fromMap = false) {
 		const index = this.scooters.findIndex((s) => s._id === id);
+		if (fromMap) {
+			document.querySelector(`#scooter-${id}`)?.scrollIntoView({
+				behavior: 'smooth',
+				block: 'center',
+			});
+		}
 		this.scooters[index].isHighlighted = true;
 	}
 
