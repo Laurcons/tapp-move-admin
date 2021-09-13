@@ -59,7 +59,7 @@ $has-google-maps-bindings: (
 					background-color: white;
 					color: black !important;
 					font-weight: bolder;
-					@each $status, $color in map-get($status-colors, $entity) {
+					@each $status, $color in $colors {
 						&.#{$status} {
 							border: 3px solid $color;
 						}
@@ -67,7 +67,7 @@ $has-google-maps-bindings: (
 				}
 			}
 		}
-		@each $status, $color in map-get($status-colors, $entity) {
+		@each $status, $color in $colors {
 			&.#{$status} {
 				background-color: $color;
 			}
