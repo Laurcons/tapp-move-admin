@@ -15,7 +15,7 @@ type UserInTable = User & { currentRides: number, index: number };
 export class UsersPageComponent implements OnInit {
 	isLoading = false;
 	tableData: UserInTable[] = [];
-	tableColumns = ["index", "email", "username", "registeredAt", "totalRides"];
+	tableColumns = ["index", "email", "status", "username", "registeredAt", "totalRides"];
 
 	constructor(private userService: UserService, private dialogService: MatDialog) {}
 
