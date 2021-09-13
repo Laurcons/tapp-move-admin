@@ -1,5 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ScooterService } from 'src/app/services/scooter.service';
 
@@ -34,7 +36,9 @@ export class NewScooterPageComponent implements OnInit, OnDestroy {
 	subs: Subscription[] = [];
 
 	constructor(
-		private scooterService: ScooterService
+		private scooterService: ScooterService,
+		private router: Router,
+		private snackbarService: MatSnackBar
 	) {}
 
 	ngOnInit(): void {
@@ -94,10 +98,27 @@ export class NewScooterPageComponent implements OnInit, OnDestroy {
 
 	handleSubmit(event: any) {
 		event.preventDefault();
-		const keys = Object.keys(this.form.controls);
-		this.scooterService.addNewScooter(
-			Object.assign({}, ...keys.map(key => ({ [key]: this.form.controls[key].value })))
-		);
+		const controls = this.form.controls;
+		const data = {
+			code: controls.code.value,
+			isDummy: controls.isDummy.value,
+			lockId: controls.lockId.value ?? undefined,
+			location: [
+				parseFloat(controls.locationLat.value),
+				parseFloat(controls.locationLon.value)
+			] as [number, number],
+			batteryLevel: parseInt(controls.batteryLevel.value),
+			isCharging: controls.isCharging.value,
+			isUnlocked: controls.isUnlocked.value
+		};
+		this.scooterService.addNewScooter(data)
+		.then((scooter) => {
+			this.router.navigate([`/scooters/${scooter._id}`]);
+			this.snackbarService.open("Scooter added");
+		})
+		.catch(() => {
+			this.snackbarService.open("Couldn't add");
+		});
 	}
 
 	handleMapClick(event: google.maps.MapMouseEvent | google.maps.IconMouseEvent) {
