@@ -17,11 +17,11 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
 	ride?: AdaptedRide;
 	subs: Subscription[] = [];
 	mapCenter: google.maps.LatLngLiteral | null = null;
+	isLoading = false;
 
 	constructor(
 		private rideService: RideService,
-		private route: ActivatedRoute,
-		private breadcrumb: BreadcrumbService
+		private route: ActivatedRoute
 	) {}
 
 	ngOnInit(): void {
@@ -34,6 +34,7 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
 	}
 
 	async loadData() {
+		this.isLoading = true;
 		const id = this.route.snapshot.paramMap.get('id');
 		if (!id) return;
 		const ride = await this.rideService.getRide(id);
@@ -59,5 +60,6 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
 				lng: lngAvg
 			};
 		}
+		this.isLoading = false;
 	}
 }

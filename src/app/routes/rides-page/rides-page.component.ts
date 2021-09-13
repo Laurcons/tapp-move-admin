@@ -24,6 +24,7 @@ export class RidesPageComponent implements OnInit, OnDestroy {
 		'user',
 		'options',
 	];
+	isLoading = false;
 	rides: RideWithInfo[] = [];
 	subs: Subscription[] = [];
 	entriesPerPage = 20;
@@ -44,12 +45,14 @@ export class RidesPageComponent implements OnInit, OnDestroy {
 	}
 
 	async loadData() {
+		this.isLoading = true;
 		const result = await this.rideService.getAllRides(this.currentPage * this.entriesPerPage, this.entriesPerPage);
 		this.rides = result.rides.map((r, i) => ({
 			...r,
 			index: i+1
 		}));
 		this.totalRides = result.total;
+		this.isLoading = false;
 	}
 
 	handlePage(event: PageEvent) {

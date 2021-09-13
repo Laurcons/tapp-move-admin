@@ -1,4 +1,13 @@
-<h1>All rides</h1>
+<div class="title-row">
+	<h1>All rides</h1>
+	<div>
+		List updates every 5 secs
+		<button mat-raised-button (click)="loadData()" [disabled]="isLoading">
+			<mat-icon>refresh</mat-icon>
+			Refresh
+		</button>
+	</div>
+</div>
 
 <table mat-table [dataSource]="rides">
 	<ng-container matColumnDef="index">

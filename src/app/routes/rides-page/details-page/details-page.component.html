@@ -1,5 +1,14 @@
 <ng-container *ngIf="ride && ride.user && ride.scooter">
-	<h1>Details about ride on {{ ride.startedAt | date:'mediumDate' }} of {{ ride.user.email }}</h1>
+	<div class="title-row">
+		<h1>Details about ride on {{ ride.startedAt | date:'mediumDate' }} of {{ ride.user.email }}</h1>
+		<div>
+			Details update every 5 secs
+			<button mat-raised-button (click)="loadData()" [disabled]="isLoading">
+				<mat-icon>refresh</mat-icon>
+				Refresh
+			</button>
+		</div>
+	</div>
 
 	<div class="row">
 		<mat-card class="info-card">
