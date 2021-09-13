@@ -1,3 +1,4 @@
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { GoogleMapsModule } from '@angular/google-maps';
@@ -30,6 +31,7 @@ import { DetailsPageComponent } from './details-page/details-page.component';
 		GoogleMapsModule,
 		MatFormFieldModule,
 		MatInputModule,
+		MatPaginatorModule,
 	],
 })
 export class RidesPageModule {}

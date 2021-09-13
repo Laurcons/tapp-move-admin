@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { interval, Subscription } from 'rxjs';
 import { RideWithInfo, RideService } from 'src/app/services/ride.service';
 
@@ -25,6 +26,9 @@ export class RidesPageComponent implements OnInit, OnDestroy {
 	];
 	rides: RideWithInfo[] = [];
 	subs: Subscription[] = [];
+	entriesPerPage = 20;
+	currentPage = 0;
+	totalRides = 0;
 
 	constructor(private rideService: RideService) {}
 
@@ -40,10 +44,16 @@ export class RidesPageComponent implements OnInit, OnDestroy {
 	}
 
 	async loadData() {
-		const result = await this.rideService.getAllRides(0, 20);
+		const result = await this.rideService.getAllRides(this.currentPage * this.entriesPerPage, this.entriesPerPage);
 		this.rides = result.rides.map((r, i) => ({
 			...r,
 			index: i+1
 		}));
+		this.totalRides = result.total;
+	}
+
+	handlePage(event: PageEvent) {
+		this.currentPage = event.pageIndex;
+		this.loadData();
 	}
 }
