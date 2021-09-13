@@ -23,54 +23,54 @@ mat-sidenav-container {
 	box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
 }
 
-@mixin badge {
-	background-color: gray;
-	border-radius: 5px;
-	padding: 5px;
-}
-
-$scooter-colors: (
-	available: green,
-	disabled: darkred,
-	booked: red,
-	booking: yellow,
-	unavailable: blueviolet
+$status-colors: (
+	scooter: (
+		available: green,
+		disabled: darkred,
+		booked: red,
+		booking: yellow,
+		unavailable: blueviolet
+	),
+	ride: (
+		ongoing: rgb(0, 163, 0),
+		payment-pending: rgb(207, 135, 0),
+		completed: darkgreen
+	),
+	user: (
+		active: green,
+		suspended: red
+	)
+);
+$has-google-maps-bindings: (
+	scooter: true,
+	ride: false,
+	user: false
 );
 
-span.scooter-badge,div.scooter-badge {
-	@include badge;
-	&.map-scooter-badge {
-		color: white !important;
-		&.highlighted {
-			background-color: white;
-			color: black !important;
-			font-weight: bolder;
-			@each $status, $color in $scooter-colors {
-				&.#{$status} {
-					border: 3px solid $color;
+@each $entity, $colors in $status-colors {
+	span.#{$entity}-badge, div.#{$entity}-badge {
+		background-color: gray;
+		border-radius: 5px;
+		padding: 5px;
+		@if map-get($has-google-maps-bindings, $entity) {
+			&.map-scooter-badge {
+				color: white !important;
+				&.highlighted {
+					background-color: white;
+					color: black !important;
+					font-weight: bolder;
+					@each $status, $color in map-get($status-colors, $entity) {
+						&.#{$status} {
+							border: 3px solid $color;
+						}
+					}
 				}
 			}
 		}
-	}
-
-	@each $status, $color in $scooter-colors {
-		&.#{$status} {
-			background-color: $color;
-		}
-	}
-}
-
-$ride-colors: (
-	ongoing: rgb(0, 163, 0),
-	payment-pending: rgb(207, 135, 0),
-	completed: darkgreen
-);
-
-span.ride-badge,div.ride-badge {
-	@include badge;
-	@each $status, $color in $ride-colors {
-		&.#{$status} {
-			background-color: $color;
+		@each $status, $color in map-get($status-colors, $entity) {
+			&.#{$status} {
+				background-color: $color;
+			}
 		}
 	}
 }
