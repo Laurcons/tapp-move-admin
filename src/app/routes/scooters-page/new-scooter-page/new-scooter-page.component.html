@@ -1,0 +1,73 @@
+
+<h1>Add a new scooter</h1>
+
+<div class="card-row">
+	<mat-card class="info-card">
+		<mat-card-header>
+			<mat-card-title>Basic details</mat-card-title>
+		</mat-card-header>
+		<mat-card-content>
+			<form [formGroup]="form" (submit)="handleSubmit($event)">
+				<mat-checkbox formControlName="isDummy">
+					Is dummy?
+					<span class="muted">Dummy scooters need some information that real scooters can retrieve automatically.</span>
+				</mat-checkbox>
+				<div class="form-row">
+					<mat-form-field>
+						<mat-label>Code</mat-label>
+						<input matInput type="text" formControlName="code" required>
+						<mat-error *ngIf="form.controls.code.errors">Code must have 4 characters: numbers and capital letters.</mat-error>
+					</mat-form-field>
+					<mat-form-field>
+						<mat-label>Internal Network Id (LockId)</mat-label>
+						<input matInput type="text" formControlName="lockId" required>
+						<mat-error *ngIf="form.controls.lockId.errors">Must be a 15-digit number.</mat-error>
+					</mat-form-field>
+				</div>
+				<div class="form-row">
+					<mat-form-field>
+						<mat-label>Latitude</mat-label>
+						<input matInput type="text" formControlName="locationLat" required>
+					</mat-form-field>
+					<mat-form-field>
+						<mat-label>Longitude</mat-label>
+						<input matInput type="text" formControlName="locationLon" required>
+					</mat-form-field>
+				</div>
+				<div class="form-row">
+					<mat-form-field>
+						<mat-label>Battery level</mat-label>
+						<input matInput type="text" formControlName="batteryLevel" required>
+						<span matSuffix>%</span>
+					</mat-form-field>
+					<mat-checkbox formControlName="isCharging">Is charging?</mat-checkbox>
+					<mat-checkbox formControlName="isUnlocked">Is unlocked?</mat-checkbox>
+				</div>
+				<span
+					matTooltip="Resolve any errors before continuing."
+					[matTooltipDisabled]="form.valid"
+				>
+					<button
+						mat-raised-button color="primary"
+						type="submit"
+						[disabled]="!form.valid">
+						Create new scooter
+					</button>
+				</span>
+			</form>
+		</mat-card-content>
+	</mat-card>
+	<mat-card class="info-card">
+		<mat-card-header>
+			<mat-card-title>Location</mat-card-title>
+		</mat-card-header>
+		<mat-card-content>
+			<google-map width="100%" [center]="mapCenter" (mapClick)="handleMapClick($event)">
+				<map-marker
+					[position]="mapCenter"
+					[label]="form.controls.code.value"
+				></map-marker>
+			</google-map>
+		</mat-card-content>
+	</mat-card>
+</div>

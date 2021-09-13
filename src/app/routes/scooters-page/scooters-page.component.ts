@@ -25,6 +25,8 @@ export class ScootersPageComponent implements OnInit, OnDestroy {
 		'lockId',
 	];
 	updateSubscription?: Subscription;
+	isDestroyed = false;
+	isLoading = false;
 
 	constructor(
 		private scooterService: ScooterService,
@@ -38,17 +40,21 @@ export class ScootersPageComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy(): void {
-		this.updateSubscription?.unsubscribe();
+		// this.updateSubscription?.unsubscribe();
+		this.isDestroyed = true;
 	}
 
 	async loadData(withTimer = false) {
+		if (this.isDestroyed) return;
+		this.isLoading = true;
 		const scooters = await this.scooterService.getAll();
 		this.scooters = scooters.map((s) => ({
 			...s,
 			isHighlighted: false,
 		}));
 		if (withTimer)
-			this.updateSubscription = timer(10 * 1000).subscribe(() => this.loadData(true));
+			// timer(10 * 1000).subscribe(() => this.loadData(true));
+		this.isLoading = false;
 	}
 
 	highlightScooter(id: string) {

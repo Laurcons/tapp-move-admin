@@ -18,14 +18,21 @@ tr.highlighted {
 
 tr.clickable-row {
 	cursor: pointer;
-	&:hover {
-		background-color: #666;
-	}
+	// &:hover {
+	// 	background-color: #666;
+	// }
 }
 
 .title-row {
 	display: flex;
 	justify-content: space-between;
+	& div {
+		display: flex;
+		align-items: baseline;
+		&>* {
+			margin-left: 10px;
+		}
+	}
 }
 
 span.red {
@@ -39,4 +46,10 @@ span.gray {
 }
 .separated>* {
 	margin-right: 3px;
+}
+
+.map-highlighted {
+	display: block;
+	background-color: blue;
+	padding: 4px;
 }

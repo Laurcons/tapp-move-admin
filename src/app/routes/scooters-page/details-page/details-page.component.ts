@@ -15,6 +15,7 @@ import { DisableDialogComponent } from '../disable-dialog/disable-dialog.compone
 export class DetailsPageComponent implements OnInit, OnDestroy {
 	scooter: Scooter | null = null;
 	updateSubscription?: Subscription;
+	isDestroyed = false;
 
 	constructor(
 		private breadcrumbService: BreadcrumbService,
@@ -28,10 +29,12 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy() {
-		this.updateSubscription?.unsubscribe();
+		// this.updateSubscription?.unsubscribe();
+		this.isDestroyed = true;
 	}
 
 	async loadData(withTimer = false) {
+		if (this.isDestroyed) return;
 		const id = this.route.snapshot.paramMap.get("id") as string;
 		this.scooter = await this.scooterService.getOne(id);
 		this.breadcrumbService.set("/scooters/:id", `Details for #${this.scooter.code}`);

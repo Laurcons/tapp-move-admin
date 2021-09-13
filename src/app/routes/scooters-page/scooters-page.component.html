@@ -1,6 +1,16 @@
 <div class="title-row">
 	<h1>All scooters</h1>
-	<div>Map updates every 10 seconds</div>
+	<div>
+		<a mat-raised-button color="primary" routerLink="new">
+			<mat-icon>add</mat-icon>
+			New scootie
+		</a>
+		<button mat-raised-button (click)="loadData()" [disabled]="isLoading">
+			<mat-icon>refresh</mat-icon>
+			Refresh
+		</button>
+		<span>Map updates every 10 seconds</span>
+	</div>
 </div>
 
 <google-map
@@ -13,7 +23,7 @@
 	<map-marker
 		*ngFor="let scooter of scooters"
 		[position]="{ lat: scooter.location[0], lng: scooter.location[1] }"
-		[label]="{ text: scooter.code }"
+		[label]="{ text: scooter.code, color: scooter.isHighlighted ? 'lightblue' : 'black', fontWeight: scooter.isHighlighted ? 'bold' : '' }"
 		[title]="scooter.code"
 		(mapMouseover)="highlightScooter(scooter._id)"
 		(mapMouseout)="unhighlightScooter(scooter._id)"
@@ -75,7 +85,8 @@
 		mat-row
 		*matRowDef="let row; columns: tableColumns"
 		[class]="{ highlighted: row.isHighlighted, 'clickable-row': true }"
-		(mouseenter)="centerOnScooter(row._id)"
+		(mouseenter)="highlightScooter(row._id)"
+		(mouseleave)="unhighlightScooter(row._id)"
 		[routerLink]="row._id"
 	></tr>
 </table>

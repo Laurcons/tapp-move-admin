@@ -1,3 +1,5 @@
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -16,12 +18,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { DisableDialogComponent } from './disable-dialog/disable-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCheckboxModule } from "@angular/material/checkbox"
+import { NewScooterPageComponent } from './new-scooter-page/new-scooter-page.component';
 
 @NgModule({
 	declarations: [
 		ScootersPageComponent,
 		DetailsPageComponent,
 		DisableDialogComponent,
+  NewScooterPageComponent,
 	],
 	imports: [
 		CommonModule,
@@ -34,6 +40,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
 		MatFormFieldModule,
 		MatButtonModule,
 		MatDialogModule,
+		MatIconModule,
+		ReactiveFormsModule,
+		MatCheckboxModule,
+		MatTooltipModule
 	],
 })
 export class ScootersPageModule {}

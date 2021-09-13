@@ -1,0 +1,43 @@
+:host {
+	display: block;
+	padding: 15px;
+}
+
+.info-card {
+	margin-bottom: 15px;
+}
+
+.card-row {
+	display: flex;
+	& > * {
+		flex: 1 0;
+		margin-left: 15px;
+	}
+	& > *:first-child {
+		margin-left: 0;
+	}
+}
+
+form {
+	mat-form-field {
+		width: 100%;
+	}
+	mat-checkbox {
+		margin-bottom: 15px;
+		& .muted {
+			color: #aaa;
+		}
+	}
+}
+
+.form-row {
+	display: flex;
+	align-items: flex-start;
+	width: 100%;
+	& > :not(:first-child) {
+		margin-left: 10px;
+	}
+	& > mat-checkbox {
+		margin-top: 15px;
+	}
+}
