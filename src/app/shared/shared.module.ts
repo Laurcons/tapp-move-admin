@@ -15,7 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { InitialismPipe } from './pipes/initialism.pipe';
 
 @NgModule({
-	exports: [FirstCasePipe, DurationPipe, RonPipe, RidesTableComponent],
+	exports: [FirstCasePipe, DurationPipe, RonPipe, InitialismPipe, RidesTableComponent],
 	declarations: [FirstCasePipe, DurationPipe, RonPipe, RidesTableComponent, InitialismPipe],
 	imports: [
 		CommonModule,
