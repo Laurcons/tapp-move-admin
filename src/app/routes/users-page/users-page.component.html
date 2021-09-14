@@ -1,4 +1,12 @@
-<h1>All users</h1>
+<div class="title-row">
+	<h1>All users</h1>
+	<div>
+		<button mat-raised-button (click)="loadData()">
+			<mat-icon>refresh</mat-icon>
+			Refresh
+		</button>
+	</div>
+</div>
 
 <table mat-table [dataSource]="tableData">
 	<ng-container matColumnDef="index">

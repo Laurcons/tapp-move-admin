@@ -1,6 +1,14 @@
 <div class="content">
 	<ng-container *ngIf="user">
-		<h1>Details for user {{ user.email }}</h1>
+		<div class="title-row">
+			<h1>Details for user {{ user.email }}</h1>
+			<div>
+				<button mat-raised-button (click)="loadData()">
+					<mat-icon>refresh</mat-icon>
+					Refresh
+				</button>
+			</div>
+		</div>
 		<div class="top-row">
 			<mat-card class="info-card">
 				<mat-card-header>
@@ -8,24 +16,32 @@
 				</mat-card-header>
 				<mat-card-content>
 					<div class="alert" *ngIf="user.suspendedReason">
-						<b>This user is suspended.</b><br>
+						<b>This user is suspended.</b><br />
 						Reason: {{ user.suspendedReason }}
 					</div>
 					<mat-form-field>
 						<mat-label>Email</mat-label>
-						<input matInput [value]="user.email" disabled>
+						<input matInput [value]="user.email" disabled />
 					</mat-form-field>
 					<mat-form-field>
 						<mat-label>Username</mat-label>
-						<input matInput [value]="user.username" disabled>
+						<input matInput [value]="user.username" disabled />
 					</mat-form-field>
 					<mat-form-field [matTooltip]="user.registeredAt | timeago">
 						<mat-label>Registered</mat-label>
-						<input matInput [value]="(user.registeredAt | date: 'medium')" disabled>
+						<input
+							matInput
+							[value]="user.registeredAt | date: 'medium'"
+							disabled
+						/>
 					</mat-form-field>
 					<mat-form-field [matTooltip]="user.lastLoginAt | timeago">
 						<mat-label>Last login</mat-label>
-						<input matInput [value]="user.lastLoginAt | date: 'medium'" disabled>
+						<input
+							matInput
+							[value]="user.lastLoginAt | date: 'medium'"
+							disabled
+						/>
 					</mat-form-field>
 				</mat-card-content>
 			</mat-card>
@@ -48,7 +64,12 @@
 						<mat-card-title>Options</mat-card-title>
 					</mat-card-header>
 					<mat-card-content>
-						<button mat-raised-button color="warn" (click)="handleSuspend()" [disabled]="user.suspendedReason">
+						<button
+							mat-raised-button
+							color="warn"
+							(click)="handleSuspend()"
+							[disabled]="user.suspendedReason"
+						>
 							<mat-icon>app_blocking</mat-icon>
 							Suspend
 						</button>
