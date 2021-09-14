@@ -1,9 +1,16 @@
 <ng-container *ngIf="ride && ride.user && ride.scooter">
 	<div class="title-row">
-		<h1>Details about ride on {{ ride.startedAt | date:'mediumDate' }} of {{ ride.user.email }}</h1>
+		<h1>
+			Details about ride on {{ ride.startedAt | date: "mediumDate" }} of
+			{{ ride.user.email }}
+		</h1>
 		<div>
 			Details update every 5 secs
-			<button mat-raised-button (click)="loadData()" [disabled]="isLoading">
+			<button
+				mat-raised-button
+				(click)="loadData()"
+				[disabled]="isLoading"
+			>
 				<mat-icon>refresh</mat-icon>
 				Refresh
 			</button>
@@ -19,86 +26,148 @@
 				<mat-card-content>
 					<mat-form-field>
 						<mat-label>Status</mat-label>
-						<input matInput [value]="ride.status" disabled>
+						<input matInput [value]="ride.status" disabled />
 					</mat-form-field>
 					<mat-form-field>
 						<mat-label>Start date</mat-label>
-						<input matInput [value]="ride.startedAt | date:'medium'" disabled>
+						<input
+							matInput
+							[value]="ride.startedAt | date: 'medium'"
+							disabled
+						/>
 					</mat-form-field>
 					<mat-form-field *ngIf="ride.endedAt">
 						<mat-label>End date</mat-label>
-						<input matInput [value]="ride.endedAt | date:'medium'" disabled>
+						<input
+							matInput
+							[value]="ride.endedAt | date: 'medium'"
+							disabled
+						/>
 					</mat-form-field>
 					<mat-form-field>
 						<mat-label>Duration</mat-label>
-						<input matInput [value]="ride.duration | duration" disabled>
+						<input
+							matInput
+							[value]="ride.duration | duration"
+							disabled
+						/>
 					</mat-form-field>
 					<mat-form-field>
 						<mat-label>Distance</mat-label>
-						<input matInput [value]="ride.pathDistance + ' meters'" disabled>
+						<input
+							matInput
+							[value]="ride.pathDistance + ' meters'"
+							disabled
+						/>
 					</mat-form-field>
 					<mat-form-field>
 						<mat-label>Price</mat-label>
-						<input matInput [value]="ride.price | ron" disabled>
+						<input matInput [value]="ride.price | ron" disabled />
 					</mat-form-field>
 				</mat-card-content>
 			</mat-card>
 			<mat-card class="info-card">
-				<mat-card-header>
+				<mat-card-header class="title-row">
 					<mat-card-title>Scooter details</mat-card-title>
+					<button mat-raised-button color="primary" [routerLink]="'/scooters/' + ride.scooter._id">
+						<mat-icon>electric_scooter</mat-icon>
+						<mat-icon>more_horiz</mat-icon>
+					</button>
 				</mat-card-header>
 				<mat-card-content>
 					<mat-form-field class="display-input">
 						<mat-label>Status</mat-label>
-						<input matInput [value]="ride.scooter.status" disabled>
+						<input
+							matInput
+							[value]="ride.scooter.status"
+							disabled
+						/>
 					</mat-form-field>
 					<mat-form-field class="display-input">
 						<mat-label>Code</mat-label>
-						<input matInput [value]="ride.scooter.code" disabled>
+						<input matInput [value]="ride.scooter.code" disabled />
 					</mat-form-field>
 					<mat-form-field class="display-input">
 						<mat-label>Internal Network Id</mat-label>
-						<input matInput *ngIf="ride.scooter.lockId" [value]="ride.scooter.lockId" disabled>
-						<input matInput *ngIf="!ride.scooter.lockId" value="N/A (is dummy)" disabled>
+						<input
+							matInput
+							*ngIf="ride.scooter.lockId"
+							[value]="ride.scooter.lockId"
+							disabled
+						/>
+						<input
+							matInput
+							*ngIf="!ride.scooter.lockId"
+							value="N/A (is dummy)"
+							disabled
+						/>
 					</mat-form-field>
 					<mat-form-field class="display-input">
 						<mat-label>Battery level</mat-label>
-						<input matInput [value]="ride.scooter.batteryLevel + '%'" disabled>
+						<input
+							matInput
+							[value]="ride.scooter.batteryLevel + '%'"
+							disabled
+						/>
 					</mat-form-field>
 					<mat-form-field class="display-input">
 						<mat-label>Charging?</mat-label>
-						<input matInput [value]="ride.scooter.isCharging ? 'Yes' : 'No'" disabled>
+						<input
+							matInput
+							[value]="ride.scooter.isCharging ? 'Yes' : 'No'"
+							disabled
+						/>
 					</mat-form-field>
 					<mat-form-field class="display-input">
 						<mat-label>Locked?</mat-label>
-						<input matInput [value]="!ride.scooter.isUnlocked ? 'Yes' : 'No'" disabled>
+						<input
+							matInput
+							[value]="!ride.scooter.isUnlocked ? 'Yes' : 'No'"
+							disabled
+						/>
 					</mat-form-field>
 				</mat-card-content>
 			</mat-card>
 			<mat-card>
-				<mat-card-header>
+				<mat-card-header class="title-row">
 					<mat-card-title>User details</mat-card-title>
+					<button mat-raised-button color="primary" [routerLink]="'/users/' + ride.user._id">
+						<mat-icon>person</mat-icon>
+						<mat-icon>more_horiz</mat-icon>
+					</button>
 				</mat-card-header>
 				<mat-card-content>
 					<div class="alert" *ngIf="ride.user.suspendedReason">
-						<b>This user is suspended.</b><br>
+						<b>This user is suspended.</b><br />
 						Reason: {{ ride.user.suspendedReason }}
 					</div>
 					<mat-form-field>
 						<mat-label>Email</mat-label>
-						<input matInput [value]="ride.user.email" disabled>
+						<input matInput [value]="ride.user.email" disabled />
 					</mat-form-field>
 					<mat-form-field>
 						<mat-label>Username</mat-label>
-						<input matInput [value]="ride.user.username" disabled>
+						<input matInput [value]="ride.user.username" disabled />
 					</mat-form-field>
-					<mat-form-field [matTooltip]="ride.user.registeredAt | timeago">
+					<mat-form-field
+						[matTooltip]="ride.user.registeredAt | timeago"
+					>
 						<mat-label>Registered</mat-label>
-						<input matInput [value]="(ride.user.registeredAt | date: 'medium')" disabled>
+						<input
+							matInput
+							[value]="ride.user.registeredAt | date: 'medium'"
+							disabled
+						/>
 					</mat-form-field>
-					<mat-form-field [matTooltip]="ride.user.lastLoginAt | timeago">
+					<mat-form-field
+						[matTooltip]="ride.user.lastLoginAt | timeago"
+					>
 						<mat-label>Last login</mat-label>
-						<input matInput [value]="ride.user.lastLoginAt | date: 'medium'" disabled>
+						<input
+							matInput
+							[value]="ride.user.lastLoginAt | date: 'medium'"
+							disabled
+						/>
 					</mat-form-field>
 				</mat-card-content>
 			</mat-card>
@@ -114,21 +183,31 @@
 						[center]="mapCenter ?? { lat: 0, lng: 0 }"
 						[zoom]="14"
 					>
-						<map-polyline
-							[path]="ride.adaptedRoute"
-						></map-polyline>
+						<map-polyline [path]="ride.adaptedRoute"></map-polyline>
 						<map-marker
 							[label]="{ text: 'START', className: 'ride-label' }"
-							[position]="{ lat: ride.startLocation[0], lng: ride.startLocation[1] }"
+							[position]="{
+								lat: ride.startLocation[0],
+								lng: ride.startLocation[1]
+							}"
 						></map-marker>
 						<map-marker
 							*ngIf="ride.status === 'ongoing'"
-							[label]="{ text: ride.scooter.code, className: 'scooter-badge map-badge booked' }"
-							[position]="{ lat: ride.route[ride.route.length-1][0], lng: ride.route[ride.route.length-1][1] }"
+							[label]="{
+								text: ride.scooter.code,
+								className: 'scooter-badge map-badge booked'
+							}"
+							[position]="{
+								lat: ride.route[ride.route.length - 1][0],
+								lng: ride.route[ride.route.length - 1][1]
+							}"
 						></map-marker>
 						<map-marker
 							[label]="{ text: 'END', className: 'ride-label' }"
-							[position]="{ lat: ride.endLocation[0], lng: ride.endLocation[1] }"
+							[position]="{
+								lat: ride.endLocation[0],
+								lng: ride.endLocation[1]
+							}"
 						></map-marker>
 						<map-circle
 							*ngFor="let point of ride.adaptedRoute"
@@ -141,7 +220,5 @@
 		</div>
 	</div>
 
-	<div class="row">
-	</div>
-
+	<div class="row"></div>
 </ng-container>

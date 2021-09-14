@@ -22,7 +22,6 @@ export class RidesPageComponent implements OnInit, OnDestroy {
 		'distance',
 		'scooter',
 		'user',
-		'options',
 	];
 	isLoading = false;
 	rides: RideWithInfo[] = [];

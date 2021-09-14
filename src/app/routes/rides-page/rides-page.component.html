@@ -55,7 +55,7 @@
 			({{ ride.user.username }})
 		</td>
 	</ng-container>
-	<ng-container matColumnDef="options">
+	{{! <ng-container matColumnDef="options">
 		<th mat-header-cell *matHeaderCellDef>Options</th>
 		<td mat-cell *matCellDef="let ride">
 			<button mat-icon-button matTooltip="Info about scooter" [routerLink]="'/scooters/' + ride.scooter._id">
@@ -68,10 +68,13 @@
 				<mat-icon>timeline</mat-icon>
 			</button>
 		</td>
-	</ng-container>
+	</ng-container> }}
 
 	<tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
-	<tr mat-row *matRowDef="let myRowData; columns: tableColumns" class="hoverable-row"></tr>
+	<tr mat-row *matRowDef="let ride; columns: tableColumns"
+		class="clickable-row"
+		[routerLink]="ride._id"
+	></tr>
 </table>
 <mat-paginator
 	[pageIndex]="currentPage"
