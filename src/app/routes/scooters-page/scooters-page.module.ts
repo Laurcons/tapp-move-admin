@@ -19,7 +19,8 @@ import { DisableDialogComponent } from './disable-dialog/disable-dialog.componen
 import { MatDialogModule } from '@angular/material/dialog';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatIconModule } from '@angular/material/icon';
-import { MatCheckboxModule } from "@angular/material/checkbox"
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatMenuModule } from '@angular/material/menu';
 import { NewScooterPageComponent } from './new-scooter-page/new-scooter-page.component';
 
 @NgModule({
@@ -27,7 +28,7 @@ import { NewScooterPageComponent } from './new-scooter-page/new-scooter-page.com
 		ScootersPageComponent,
 		DetailsPageComponent,
 		DisableDialogComponent,
-  NewScooterPageComponent,
+		NewScooterPageComponent,
 	],
 	imports: [
 		CommonModule,
@@ -43,7 +44,8 @@ import { NewScooterPageComponent } from './new-scooter-page/new-scooter-page.com
 		MatIconModule,
 		ReactiveFormsModule,
 		MatCheckboxModule,
-		MatTooltipModule
+		MatTooltipModule,
+		MatMenuModule,
 	],
 })
 export class ScootersPageModule {}

@@ -71,7 +71,7 @@
 				<mat-icon>refresh</mat-icon>
 				Refresh
 			</button>
-			<span>Map updates every 5 seconds</span>
+			<span [matMenuTriggerFor]="newBtnMenu">Map updates every 5 seconds</span>
 		</div>
 		<google-map
 			width="100%"
@@ -97,3 +97,9 @@
 	</div>
 </div>
 
+<mat-menu #newBtnMenu>
+	<button mat-menu-item (click)="add50Dummies()">
+		<mat-icon>add</mat-icon>
+		<span>Add 50 dummy scooters</span>
+	</button>
+</mat-menu>

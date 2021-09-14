@@ -28,23 +28,24 @@ export class ScootersPageComponent implements OnInit, OnDestroy {
 	isDestroyed = false;
 	isLoading = false;
 	subs: Subscription[] = [];
+	private additionalScooters: ScooterWithHighlighting[] = [];
 
 	constructor(
 		private scooterService: ScooterService,
 		private _router: Router
 	) {}
 
-	get router() { return this._router; }
+	get router() {
+		return this._router;
+	}
 
 	ngOnInit(): void {
 		this.loadData();
-		this.subs.push(
-			interval(5000).subscribe(() => this.loadData())
-		);
+		this.subs.push(interval(5000).subscribe(() => this.loadData()));
 	}
 
 	ngOnDestroy(): void {
-		this.subs.forEach(s => s.unsubscribe());
+		this.subs.forEach((s) => s.unsubscribe());
 	}
 
 	async loadData() {
@@ -54,26 +55,7 @@ export class ScootersPageComponent implements OnInit, OnDestroy {
 		this.scooters = scooters.map((s) => ({
 			...s,
 			isHighlighted: false,
-		}));
-		// this.scooters = this.scooters.concat(
-		// 	Array(50)
-		// 		.fill(0)
-		// 		.map((_, index) => ({
-		// 			_id: 'BWABWA' + index,
-		// 			batteryLevel: 420,
-		// 			code: 'CJ' + index.toString().padStart(2, 'X'),
-		// 			isCharging: true,
-		// 			isDummy: true,
-		// 			isHighlighted: false,
-		// 			isUnlocked: true,
-		// 			location: [
-		// 				46.771071 - 0.05 + Math.random() * 0.1,
-		// 				23.59714 - 0.05 + Math.random() * 0.1,
-		// 			],
-		// 			status: 'disabled',
-		// 			lockId: '',
-		// 		}))
-		// );
+		})).concat(this.additionalScooters);
 		this.isLoading = false;
 	}
 
@@ -100,5 +82,25 @@ export class ScootersPageComponent implements OnInit, OnDestroy {
 			lat: scooter.location[0],
 			lng: scooter.location[1],
 		};
+	}
+
+	add50Dummies() {
+		this.additionalScooters = Array(50)
+			.fill(0)
+			.map((_, index) => ({
+				_id: 'BWABWA' + index,
+				batteryLevel: 420,
+				code: 'CJ' + index.toString().padStart(2, 'X'),
+				isCharging: true,
+				isDummy: true,
+				isHighlighted: false,
+				isUnlocked: true,
+				location: [
+					46.771071 - 0.025 + Math.random() * 0.05,
+					23.59714 - 0.05 + Math.random() * 0.1,
+				],
+				status: 'disabled',
+				lockId: '(dummy of dummy; doesn\'t exist in db)',
+			}));
 	}
 }
