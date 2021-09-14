@@ -42,6 +42,14 @@
 		<th mat-header-cell *matHeaderCellDef>{{ of === 'scooter' ? "User" : "Scooter" }}</th>
 		<td mat-cell *matCellDef="let ride">
 			<ng-container *ngIf="of === 'user'">
+				<span
+					class="scooter-badge"
+					[ngClass]="ride.scooter.status"
+					style="margin-right: 5px"
+					[matTooltip]="ride.scooter.status | titlecase"
+				>
+					{{ ride.scooter.status | initialism }}
+				</span>
 				#{{ ride.scooter.code }}
 				{{ ride.scooter.isDummy ? "(dummy)" : "(real)" }}
 				{{
@@ -53,6 +61,14 @@
 				}}
 			</ng-container>
 			<ng-container *ngIf="of === 'scooter'">
+				<span
+					class="user-badge"
+					[ngClass]="ride.user.suspendedReason ? 'suspended' : 'active'"
+					[matTooltip]="ride.user.suspendedReason ? 'Suspended' : 'Active'"
+					style="margin-right: 5px"
+				>
+					{{ ride.user.suspendedReason ? 'S' : 'A' }}
+				</span>
 				{{ ride.user.email }}
 				({{ ride.user.username }})
 			</ng-container>
