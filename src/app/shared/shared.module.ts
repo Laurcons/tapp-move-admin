@@ -12,10 +12,11 @@ import { TimeagoModule } from 'ngx-timeago';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { InitialismPipe } from './pipes/initialism.pipe';
 
 @NgModule({
 	exports: [FirstCasePipe, DurationPipe, RonPipe, RidesTableComponent],
-	declarations: [FirstCasePipe, DurationPipe, RonPipe, RidesTableComponent],
+	declarations: [FirstCasePipe, DurationPipe, RonPipe, RidesTableComponent, InitialismPipe],
 	imports: [
 		CommonModule,
 		MatTableModule,
