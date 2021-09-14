@@ -1,3 +1,4 @@
+import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from './../../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -50,6 +51,7 @@ import { FormsModule } from '@angular/forms';
 		MatTooltipModule,
 		MatRadioModule,
 		MatBadgeModule,
+		MatIconModule
 	],
 })
 export class UsersPageModule {}

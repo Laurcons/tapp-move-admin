@@ -1,11 +1,18 @@
-
 <h1>You are about to disable/enable a scooter.</h1>
 <div class="alert">
-	Please note that, while <i>disabling</i> can be done safely, <i>enabling</i> a scooter will set its status to Available, even if it is in an unavailable state.
+	Please note that, while <i>disabling</i> can be done safely,
+	<i>enabling</i> a scooter will set its status to Available, even if it is in
+	an unavailable state.
 </div>
 If you are sure about this action, you can continue.
 
 <mat-dialog-actions>
-	<button mat-raised-button color="primary" [mat-dialog-close]="true">Continue</button>
-	<button mat-raised-button mat-dialog-close>No, I didn't mean to!</button>
+	<button mat-raised-button color="primary" [mat-dialog-close]="true">
+		<mat-icon>adjust</mat-icon>
+		Continue
+	</button>
+	<button mat-raised-button mat-dialog-close>
+		<mat-icon>close</mat-icon>
+		No, I didn't mean to!
+	</button>
 </mat-dialog-actions>
