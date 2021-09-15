@@ -1,3 +1,5 @@
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -15,9 +17,10 @@ import { RidesPageRoutingModule } from './rides-page-routing.module';
 import { RidesPageComponent } from './rides-page.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DetailsPageComponent } from './details-page/details-page.component';
+import { PaymentDialogComponent } from './payment-dialog/payment-dialog.component';
 
 @NgModule({
-	declarations: [RidesPageComponent, DetailsPageComponent],
+	declarations: [RidesPageComponent, DetailsPageComponent, PaymentDialogComponent],
 	imports: [
 		CommonModule,
 		SharedModule,
@@ -32,6 +35,8 @@ import { DetailsPageComponent } from './details-page/details-page.component';
 		MatFormFieldModule,
 		MatInputModule,
 		MatPaginatorModule,
+		MatDialogModule,
+		MatProgressSpinnerModule,
 	],
 })
 export class RidesPageModule {}

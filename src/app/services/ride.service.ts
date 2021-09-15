@@ -67,4 +67,13 @@ export class RideService {
 			.toPromise()
 			.then(r => r.ride);
 	}
+
+	async beginPayment(rideId: string) {
+		return this.http
+			.post<{
+				url: string;
+			}>(`/rides/${rideId}/pay`, {})
+			.toPromise()
+			.then(r => r.url);
+	}
 }

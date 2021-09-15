@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RideService, RideWithInfo } from 'src/app/services/ride.service';
 import { interval, Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { PaymentDialogComponent } from '../payment-dialog/payment-dialog.component';
 
 type AdaptedRide = RideWithInfo & {
 	adaptedRoute: google.maps.LatLngLiteral[];
@@ -21,7 +23,8 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private rideService: RideService,
-		private route: ActivatedRoute
+		private route: ActivatedRoute,
+		private dialogService: MatDialog
 	) {}
 
 	ngOnInit(): void {
@@ -61,5 +64,12 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
 			};
 		}
 		this.isLoading = false;
+	}
+
+	openPaymentDialog() {
+		if (!this.ride) return;
+		this.dialogService.open(PaymentDialogComponent, {
+			data: { rideId: this.ride._id }
+		});
 	}
 }

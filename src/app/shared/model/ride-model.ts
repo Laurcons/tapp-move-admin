@@ -1,6 +1,7 @@
 
 export interface Ride {
-	status: 'ongoing' | 'payment-pending' | 'completed';
+	_id: string;
+	status: 'ongoing' | 'payment-pending' | 'payment-initiated' | 'completed';
 	route: [[number, number]];
 	startLocation: [number, number];
 	endLocation: [number, number];

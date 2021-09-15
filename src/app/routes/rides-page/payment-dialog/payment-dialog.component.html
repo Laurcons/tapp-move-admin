@@ -1,0 +1,19 @@
+<div class="width"></div>
+
+<ng-container *ngIf="isLoading">
+	<mat-spinner *ngIf="isLoading" class="spinner"></mat-spinner>
+	<div style="text-align: center;" *ngIf="message">{{ message }}</div>
+</ng-container>
+
+<ng-container *ngIf="!isLoading">
+	<ng-container *ngIf="ride?.status === 'payment-pending'">
+		<div style="text-align: center;">You have cancelled your payment.</div>
+	</ng-container>
+
+	<ng-container *ngIf="ride?.status === 'completed'">
+		<div style="text-align: center;">
+			<mat-icon>check_circle</mat-icon>
+			Success! You paid this ride.
+		</div>
+	</ng-container>
+</ng-container>

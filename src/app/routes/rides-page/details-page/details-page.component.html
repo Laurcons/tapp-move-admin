@@ -20,8 +20,16 @@
 	<div class="row">
 		<div>
 			<mat-card class="info-card">
-				<mat-card-header>
+				<mat-card-header class="title-row">
 					<mat-card-title>Basic details</mat-card-title>
+					<button
+						mat-raised-button color="primary"
+						[disabled]="ride.status !== 'payment-pending' && ride.status !== 'payment-initiated'"
+						(click)="openPaymentDialog()"
+					>
+						<mat-icon>payment</mat-icon>
+						Pay
+					</button>
 				</mat-card-header>
 				<mat-card-content>
 					<mat-form-field>
