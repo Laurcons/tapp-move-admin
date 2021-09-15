@@ -20,6 +20,7 @@ export class RidesPageComponent implements OnInit, OnDestroy {
 		'endedAt',
 		'duration',
 		'distance',
+		'price',
 		'scooter',
 		'user',
 	];
