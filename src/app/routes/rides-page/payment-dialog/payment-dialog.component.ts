@@ -43,7 +43,11 @@ export class PaymentDialogComponent implements OnInit, OnDestroy {
 
 	redirectAndBeginWaiting(url: string) {
 		this.message = "Waiting for you";
-		window.open(url);
+		const elem = document.createElement("a");
+		elem.href = url;
+		elem.target = "_blank";
+		console.log(elem);
+		elem.click();
 		this.sub = interval(5000).subscribe(async () => {
 			await this.loadData(false);
 			if (this.ride?.status !== 'payment-initiated') {
