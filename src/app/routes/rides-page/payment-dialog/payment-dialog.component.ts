@@ -14,6 +14,8 @@ export class PaymentDialogComponent implements OnInit, OnDestroy {
 	isLoading = true;
 	message = "";
 	sub?: Subscription;
+	url = "";
+	isButtonDisplayed = false;
 
 	constructor(
 		@Inject(MAT_DIALOG_DATA) private data: { rideId: string; },
@@ -37,17 +39,17 @@ export class PaymentDialogComponent implements OnInit, OnDestroy {
 
 	async initPayment() {
 		this.message = "Beginning payment";
-		const url = await this.rideService.beginPayment(this.data.rideId);
-		this.redirectAndBeginWaiting(url);
+		this.url = await this.rideService.beginPayment(this.data.rideId);
+		this.redirectAndBeginWaiting();
 	}
 
-	redirectAndBeginWaiting(url: string) {
-		this.message = "Waiting for you";
-		const elem = document.createElement("a");
-		elem.href = url;
-		elem.target = "_blank";
-		console.log(elem);
-		elem.click();
+	redirectAndBeginWaiting() {
+		this.message = "Waiting for you to finish your payment";
+		const wind = window.open(this.url);
+		// const wind = null;
+		if (!wind) {
+			this.isButtonDisplayed = true;
+		}
 		this.sub = interval(5000).subscribe(async () => {
 			await this.loadData(false);
 			if (this.ride?.status !== 'payment-initiated') {

@@ -1,9 +1,16 @@
 <div class="width"></div>
 
-<ng-container *ngIf="isLoading">
+<div *ngIf="isLoading" class="centered">
 	<mat-spinner *ngIf="isLoading" class="spinner"></mat-spinner>
-	<div style="text-align: center;" *ngIf="message">{{ message }}</div>
-</ng-container>
+	<div *ngIf="message">{{ message }}</div>
+	<a
+		*ngIf="isButtonDisplayed"
+		mat-raised-button color="primary"
+		target="_blank"
+		[href]="url"
+		class=""
+	>Continue to payment</a>
+</div>
 
 <ng-container *ngIf="!isLoading">
 	<ng-container *ngIf="ride?.status === 'payment-pending'">
