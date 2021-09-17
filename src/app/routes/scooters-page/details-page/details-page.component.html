@@ -25,6 +25,10 @@
 					<input matInput *ngIf="!scooter.lockId" value="N/A (is dummy)" disabled>
 				</mat-form-field>
 				<mat-form-field class="display-input">
+					<mat-label>Location</mat-label>
+					<input matInput [value]="scooter.location" disabled>
+				</mat-form-field>
+				<mat-form-field class="display-input">
 					<mat-label>Battery level</mat-label>
 					<input matInput [value]="scooter.batteryLevel + '%'" disabled>
 				</mat-form-field>
