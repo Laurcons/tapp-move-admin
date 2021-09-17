@@ -7,6 +7,9 @@ export interface Ride {
 	endLocation: [number, number];
 	startedAt: string;
 	endedAt?: string;
+	distance: number;
+	price: number;
+	duration: number;
 	scooterId: string;
 	userId: string;
 }

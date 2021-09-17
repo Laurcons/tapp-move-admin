@@ -5,10 +5,6 @@ import { User } from '../shared/model/user-model';
 import { Scooter } from '../shared/model/scooter-model';
 
 export type RideWithInfo = Ride & {
-	duration: number;
-	linearDistance: number;
-	pathDistance: number;
-	price: number;
 	user?: User;
 	scooter?: Scooter;
 };
