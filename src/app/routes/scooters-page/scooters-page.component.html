@@ -1,7 +1,7 @@
 
 <div class="top-row">
 	<div>
-		<h1>All scooters</h1>
+		<h1 [matMenuTriggerFor]="newBtnMenu">All scooters</h1>
 		<table mat-table [dataSource]="scooters" class="mat-elevation-z8">
 			<ng-container matColumnDef="code">
 				<th mat-header-cell *matHeaderCellDef>Code</th>
@@ -65,13 +65,17 @@
 		<div class="top-buttons">
 			<a mat-raised-button color="primary" routerLink="new">
 				<mat-icon>add</mat-icon>
-				New scootie
+				New scooter
 			</a>
-			<button mat-raised-button (click)="loadData()" [disabled]="isLoading">
+			<button
+				mat-raised-button
+				(click)="loadData()"
+				[disabled]="isLoading"
+				matBadge="5s"
+			>
 				<mat-icon>refresh</mat-icon>
 				Refresh
 			</button>
-			<span [matMenuTriggerFor]="newBtnMenu">Map updates every 5 seconds</span>
 		</div>
 		<google-map
 			width="100%"

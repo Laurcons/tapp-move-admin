@@ -18,6 +18,7 @@ import { RidesPageComponent } from './rides-page.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DetailsPageComponent } from './details-page/details-page.component';
 import { PaymentDialogComponent } from './payment-dialog/payment-dialog.component';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
 	declarations: [RidesPageComponent, DetailsPageComponent, PaymentDialogComponent],
@@ -36,6 +37,7 @@ import { PaymentDialogComponent } from './payment-dialog/payment-dialog.componen
 		MatInputModule,
 		MatPaginatorModule,
 		MatDialogModule,
+		MatBadgeModule,
 		MatProgressSpinnerModule,
 	],
 })

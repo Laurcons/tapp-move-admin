@@ -1,35 +1,32 @@
 
-<mat-toolbar>
-	<button mat-icon-button *ngIf="isLoggedIn" (click)="isSidebarOpen = !isSidebarOpen">
-		<mat-icon>menu</mat-icon>
-	</button>
-	<span>Tapp Move - Admin Panel</span>
-	<xng-breadcrumb [separator]="bcSeparator" class="bc">
-		<ng-container *xngBreadcrumbItem="let breadcrumb">
-			<span class="bc-item">{{ breadcrumb | firstCase }}</span>
-		</ng-container>
-	</xng-breadcrumb>
-	<div class="spacer"></div>
-	<mat-spinner diameter="40" *ngIf="isDoingTask"></mat-spinner>
-	<button mat-mini-fab class="item-spacer" *ngIf="isLoggedIn" (click)="onLogoutClick()">
-		<mat-icon>logout</mat-icon>
-	</button>
-</mat-toolbar>
-
 <mat-sidenav-container>
-	<mat-sidenav mode="side" [opened]="isSidebarOpen">
+	<mat-sidenav
+		mode="side"
+		[opened]="sidenavStatus !== 'hidden' && isLoggedIn"
+		[ngClass]="sidenavStatus"
+		(mouseenter)="sidenavMouseEnter()"
+		(mouseleave)="sidenavStatus = 'closed'"
+	>
+		<img class="logo" src="./assets/logo.png">
 		<mat-nav-list>
-			<a mat-list-item routerLink="/users">
-				<mat-icon matListIcon>people</mat-icon>
-				Users
-			</a>
-			<a mat-list-item routerLink="/scooters">
-				<mat-icon matListIcon>electric_scooter</mat-icon>
-				Scooters
-			</a>
-			<a mat-list-item routerLink="/rides">
-				<mat-icon matListIcon>moving</mat-icon>
-				Rides
+			<section>
+
+				<a mat-list-item routerLink="/users">
+					<mat-icon matListIcon>people</mat-icon>
+					<span *ngIf="sidenavStatus === 'open'">Users</span>
+				</a>
+				<a mat-list-item routerLink="/scooters">
+					<mat-icon matListIcon>electric_scooter</mat-icon>
+					<span *ngIf="sidenavStatus === 'open'">Scooters</span>
+				</a>
+				<a mat-list-item routerLink="/rides">
+					<mat-icon matListIcon>moving</mat-icon>
+					<span *ngIf="sidenavStatus === 'open'">Rides</span>
+				</a>
+			</section>
+			<a mat-list-item class="logout" (click)="onLogoutClick()">
+				<mat-icon matListIcon>logout</mat-icon>
+				<span *ngIf="sidenavStatus === 'open'">Logout</span>
 			</a>
 		</mat-nav-list>
 	</mat-sidenav>

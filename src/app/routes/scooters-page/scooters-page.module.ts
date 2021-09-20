@@ -22,6 +22,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatMenuModule } from '@angular/material/menu';
 import { NewScooterPageComponent } from './new-scooter-page/new-scooter-page.component';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
 	declarations: [
@@ -44,6 +45,7 @@ import { NewScooterPageComponent } from './new-scooter-page/new-scooter-page.com
 		MatIconModule,
 		ReactiveFormsModule,
 		MatCheckboxModule,
+		MatBadgeModule,
 		MatTooltipModule,
 		MatMenuModule,
 	],

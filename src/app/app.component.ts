@@ -19,7 +19,7 @@ import {
 	styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-	isSidebarOpen = false;
+	sidenavStatus: "open" | "closed" | "hidden" = "hidden";
 	isLazyLoading = false;
 	isDoingTask = false;
 	isLoggedIn = false;
@@ -48,7 +48,12 @@ export class AppComponent implements OnInit {
 			}
 		});
 		this.tokenService.tokenChanged$.subscribe((token) => {
-			setTimeout(() => (this.isLoggedIn = !!token), 0);
+			setTimeout(() => {
+				this.isLoggedIn = !!token;
+				if (this.isLoggedIn)
+					this.sidenavStatus = "closed";
+				else this.sidenavStatus = "hidden";
+			}, 0);
 		});
 		this.backgroundWorkService.taskList$.subscribe((list) => {
 			setTimeout(() => (this.isDoingTask = list.length !== 0), 0);
@@ -60,5 +65,12 @@ export class AppComponent implements OnInit {
 		await this.authService.logout();
 		ref.dismiss();
 		this.router.navigate(['/auth']);
+	}
+
+	async sidenavMouseEnter() {
+		// setTimeout(() => {
+		// 	if (this.sidenavStatus === 'closed')
+				this.sidenavStatus = 'open';
+		// }, 750);
 	}
 }
