@@ -12,3 +12,19 @@
 mat-form-field {
 	width: 100%;
 }
+
+mat-card {
+	margin-top: 30vh;
+}
+
+[mat-raised-button] {
+	display: block;
+}
+
+.logo {
+	width: 100px;
+	border-radius: 5px;
+	margin: 20px auto;
+	display: block;
+	transition: all 300ms;
+}

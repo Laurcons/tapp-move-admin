@@ -2,10 +2,8 @@
 	<ng-container *ngIf="!admin">
 		<mat-card>
 			<form>
-				<mat-card-title>
-					<h1>The administration panel requires authorization</h1>
-				</mat-card-title>
 				<mat-card-content>
+					<img class="logo" src="./assets/logo.png">
 					<mat-form-field>
 						<mat-label>Email</mat-label>
 						<input
@@ -40,8 +38,6 @@
 							The password is too short.
 						</mat-error>
 					</mat-form-field>
-				</mat-card-content>
-				<mat-card-actions>
 					<button
 						mat-raised-button
 						type="submit"
@@ -50,7 +46,7 @@
 					>
 						Login
 					</button>
-				</mat-card-actions>
+				</mat-card-content>
 			</form>
 		</mat-card>
 		<mat-progress-bar
@@ -58,5 +54,4 @@
 			value="0"
 		></mat-progress-bar>
 	</ng-container>
-	Tapp Move - API v1.0 ADMIN v1.0
 </div>
