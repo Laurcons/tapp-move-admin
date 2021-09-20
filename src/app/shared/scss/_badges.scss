@@ -29,9 +29,9 @@ $has-google-maps-bindings: (
 		background-color: gray;
 		border-radius: 5px;
 		padding: 5px;
+		color: white !important;
 		@if map-get($has-google-maps-bindings, $entity) {
 			&.map-#{$entity}-badge, &.map-badge {
-				color: white !important;
 				&.highlighted {
 					background-color: white;
 					color: black !important;
