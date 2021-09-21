@@ -67,10 +67,14 @@ export class AppComponent implements OnInit {
 		this.router.navigate(['/auth']);
 	}
 
-	async sidenavMouseEnter() {
-		// setTimeout(() => {
-		// 	if (this.sidenavStatus === 'closed')
-				this.sidenavStatus = 'open';
-		// }, 750);
+	async toggleSidenav() {
+		if (this.sidenavStatus === 'closed') {
+			this.sidenavStatus = 'open';
+			return;
+		}
+		if (this.sidenavStatus === 'open') {
+			this.sidenavStatus = "closed";
+			return;
+		}
 	}
 }

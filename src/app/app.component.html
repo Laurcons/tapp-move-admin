@@ -1,16 +1,21 @@
 
-<mat-sidenav-container>
-	<mat-sidenav
-		mode="side"
-		[opened]="sidenavStatus !== 'hidden' && isLoggedIn"
+<div class="page-container">
+	<nav
+		class="sidenav"
 		[ngClass]="sidenavStatus"
-		(mouseenter)="sidenavMouseEnter()"
-		(mouseleave)="sidenavStatus = 'closed'"
+		*ngIf="sidenavStatus !== 'hidden'"
 	>
+		<button
+			mat-icon-button
+			class="collapse-btn"
+			(click)="toggleSidenav()"
+		>
+			<mat-icon *ngIf="sidenavStatus === 'closed'">chevron_right</mat-icon>
+			<mat-icon *ngIf="sidenavStatus === 'open'">chevron_left</mat-icon>
+		</button>
 		<img class="logo" src="./assets/logo.png">
 		<mat-nav-list>
 			<section>
-
 				<a mat-list-item routerLink="/users">
 					<mat-icon matListIcon>people</mat-icon>
 					<span *ngIf="sidenavStatus === 'open'">Users</span>
@@ -29,11 +34,11 @@
 				<span *ngIf="sidenavStatus === 'open'">Logout</span>
 			</a>
 		</mat-nav-list>
-	</mat-sidenav>
-	<mat-sidenav-content>
+	</nav>
+	<div class="page-content" [ngClass]="'sidenav-' + sidenavStatus">
 		<router-outlet></router-outlet>
-	</mat-sidenav-content>
-</mat-sidenav-container>
+	</div>
+</div>
 
 <ng-template #bcSeparator>
 	<span class="bc-separator">&gt;</span>
