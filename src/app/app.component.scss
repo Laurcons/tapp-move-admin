@@ -89,7 +89,7 @@ mat-nav-list {
 		font-size: 20px;
 	}
 
-	transform: translate(50%) scale(1);
+	transform: translate(50%) scale(0);
 	.sidenav:hover & {
 		transform: translate(50%) scale(1);
 	}
