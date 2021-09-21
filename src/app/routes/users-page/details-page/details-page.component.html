@@ -1,7 +1,10 @@
 <div class="content">
 	<ng-container *ngIf="user">
 		<div class="title-row">
-			<h1>Details for user {{ user.email }}</h1>
+			<h1>
+			<a mat-icon-button routerLink=".."><mat-icon>arrow_back</mat-icon></a>
+				Details for user {{ user.email }}
+			</h1>
 			<div>
 				<button mat-raised-button (click)="loadData()">
 					<mat-icon>refresh</mat-icon>

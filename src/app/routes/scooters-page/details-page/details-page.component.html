@@ -1,7 +1,10 @@
 
 <ng-container *ngIf="scooter">
 	<div class="title-row">
-		<h1>Details for scooter {{scooter.code}}</h1>
+		<h1>
+			<a mat-icon-button routerLink=".."><mat-icon>arrow_back</mat-icon></a>
+			Details for scooter {{scooter.code}}
+		</h1>
 		<div>Info updates every 10 seconds</div>
 	</div>
 

@@ -1,6 +1,7 @@
 <ng-container *ngIf="ride && ride.user && ride.scooter">
 	<div class="title-row">
 		<h1>
+			<a mat-icon-button routerLink=".."><mat-icon>arrow_back</mat-icon></a>
 			Details about ride on {{ ride.startedAt | date: "mediumDate" }} of
 			{{ ride.user.email }}
 		</h1>
